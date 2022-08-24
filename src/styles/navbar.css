@@ -77,6 +77,16 @@ header button {
 }
 
 
+.header__upload-btn {
+  border: 1px solid rgba(22, 24, 35, 0.12);
+  align-self: stretch;
+  padding: .6em 1.3em;
+  border-radius: .5em;
+  cursor: pointer;
+}
+.header__upload-btn:hover {
+  background-color: rgba(22, 24, 35, 0.03);
+}
 
 .header__block-right {
   display: flex;
@@ -94,15 +104,19 @@ header button {
   border-radius: 0.5em;
   padding: .6em 1.3em;
   cursor: pointer;
+  border: 1px solid #FF6E91;
+  margin-left: 20px;
 }
 
 .header__btn-login:hover {
   background-color: #ff5b81;
+  border: 1px solid #ff5b81;
 }
 
 .header__chat-icon img {
   width: 1.5em;
   height: 1.5em;
+  cursor: pointer;
 }
 
 .header__profile-avatar {
