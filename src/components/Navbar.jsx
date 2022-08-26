@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import "../styles/navbar.css"
+import logo from '../assets/icons/logo_black.svg'
 
 const Navbar = () => {
 
@@ -13,7 +14,7 @@ const Navbar = () => {
       <div className="container">
         <div className="header__logo">
           <a>
-            <img src="https://play-lh.googleusercontent.com/ahJtMe0vfOlAu1XJVQ6rcaGrQBgtrEZQefHy7SXB7jpijKhu1Kkox90XDuH8RmcBOXNn" alt="" className='header-logo' />
+            <img src={logo} alt="" className='header-logo' />
           </a>
         </div>
         <div className="header__search">
