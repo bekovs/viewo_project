@@ -11,21 +11,18 @@
   display: flex;
   flex-direction: column;
   width: 30%;
-  overflow-y: auto;
-  overflow-x: hidden;
-  overscroll-behavior-y: contain;
+  overflow: scroll;
 }
 
 .scrollbar {
   display: flex;
   flex-direction: column;
   width: 70%;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: scroll;
 }
 
 .head-links {
-  padding: 10px 0;
+  padding: 20px 0;
   border-bottom: 1px solid #f1f1f2;
 }
 
@@ -48,6 +45,8 @@
 
 .head-links div span {
   margin: 0 10px;
+  font-weight: 700;
+  font-size: 1.1em;
 }
 
 .head-links div:hover {
@@ -80,9 +79,45 @@
   display: flex;
 }
 
+.post {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 5% auto 10% auto;
+  padding-bottom: 5%;
+  border-bottom: 1px solid #f1f1f2;
+  overflow: visible;
+}
+
 .post-info video {
+  border-radius: 10px;
   max-width: 500px;
   max-height: 600px;
+}
+
+.post-info {
+  overflow-y: hidden;
+}
+
+.post-actions {
+  position: absolute;
+  bottom: 10%;
+  left: 105%;
+}
+
+.post-actions div {
+  background-color: #f1f1f2;
+  margin: 15px 0;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  cursor: pointer;
+  transition: 200ms;
+}
+
+.post-actions div:hover {
+  background-color: #f7f7f8;
 }
 
 .user-info div {
@@ -102,14 +137,6 @@
 .user-info button:hover {
   background-color: #ff5b81;
   border: 1px solid #ff5b81;
-}
-
-.post {
-  display: flex;
-  flex-direction: column;
-  margin: 5% auto 10% auto;
-  padding-bottom: 5%;
-  border-bottom: 1px solid #f1f1f2;
 }
 
 .rec-account img {
@@ -183,4 +210,8 @@
 
 .footer-section p:hover {
   text-decoration: underline;
+}
+
+.active {
+  color:#ff5b81;
 }

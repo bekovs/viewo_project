@@ -1,9 +1,7 @@
 import React from 'react';
-// import vid from '../../assets/media/.mp4';
 import rena from '../../assets/images/rena.jpg'
-import vid from '../../assets/media/cat.MOV'
 
-const PostCard = () => {
+const PostCard = ({vid}) => {
   return (
     <div className='post'>
       <div className='user-info'>
@@ -14,12 +12,16 @@ const PostCard = () => {
             <p className='post-title'>post title</p>
           </div>
         </div>
-        <button>follow</button>
+        <button>Follow</button>
       </div>
       <div className='post-info'>
         <video src={vid} loop autoPlay controls>
           Your browser does not support the video tag.
         </video>
+      </div>
+      <div className='post-actions'>
+        <div className="like"></div>
+        <div className="comment"></div>
       </div>
     </div>
   );

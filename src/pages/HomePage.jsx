@@ -2,6 +2,7 @@ import React from 'react';
 import PostList from '../components/posts/PostList';
 import "../styles/HomePage.css"
 import rena from '../assets/images/rena.jpg'
+import { useState } from 'react';
 
 const HomePage = () => {
 
@@ -9,7 +10,7 @@ const HomePage = () => {
     <div className='main'>
       <div className='sidebar'>
         <div className='head-links'>
-          <div><span>Recommendations</span></div>
+          <div className='active'><span>Recommendations</span></div>
           <div><span>Followed</span></div>
           <div><span>Favorites</span></div>
         </div>
