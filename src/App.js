@@ -6,7 +6,6 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <Likes />
       <MainRoutes />
     </div>
   );

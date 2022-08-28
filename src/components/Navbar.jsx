@@ -1,13 +1,8 @@
 import React from 'react';
-import { useState } from 'react';
+// import { useState } from 'react';
 import "../styles/navbar.css"
 
 const Navbar = () => {
-
-
-
-
-
   return (
     <header>
       <div className="container">
@@ -24,9 +19,12 @@ const Navbar = () => {
         <div className="header__block-right">
 
           <div className="header__profile_section">
-            <button className="header__upload-btn">
-              + Upload
-            </button>
+            <input type="file" id='upload-btn' accept='video/*' style={{ display: "none" }} />
+            <label htmlFor="upload-btn">
+              <a className="header__upload-btn">
+                + Upload
+              </a>
+            </label>
             <div className="header__chat-icon">
               <img src="https://play-lh.googleusercontent.com/cF_oWC9Io_I9smEBhjhUHkOO6vX5wMbZJgFpGny4MkMMtz25iIJEh2wASdbbEN7jseAx" alt="" />
             </div>
@@ -44,11 +42,10 @@ const Navbar = () => {
               </ul>
             </div>
           </div>
-
           <div className="header__login">
-            <button className="header__upload-btn">
+            <a className="header__upload-btn">
               + Upload
-            </button>
+            </a>
             <button className="header__btn-login">
               Log in
             </button>
