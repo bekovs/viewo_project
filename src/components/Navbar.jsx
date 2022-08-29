@@ -1,13 +1,15 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 // import { useState } from 'react';
 import "../styles/navbar.css"
 
 const Navbar = () => {
+  const navigate = useNavigate()
   return (
     <header>
       <div className="container">
         <div className="header__logo">
-          <a>
+          <a onClick={() => navigate("/")}>
             <img src="https://play-lh.googleusercontent.com/ahJtMe0vfOlAu1XJVQ6rcaGrQBgtrEZQefHy7SXB7jpijKhu1Kkox90XDuH8RmcBOXNn" alt="" className='header-logo' />
           </a>
         </div>
@@ -17,12 +19,11 @@ const Navbar = () => {
         </div>
 
         <div className="header__block-right">
-
           <div className="header__profile_section">
             <input type="file" id='upload-btn' accept='video/*' style={{ display: "none" }} />
             <label htmlFor="upload-btn">
               <a className="header__upload-btn">
-                + Upload
+                +<span> Upload</span>
               </a>
             </label>
             <div className="header__chat-icon">
@@ -44,7 +45,7 @@ const Navbar = () => {
           </div>
           <div className="header__login">
             <a className="header__upload-btn">
-              + Upload
+              +<span> Upload</span>
             </a>
             <button className="header__btn-login">
               Log in

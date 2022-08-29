@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
+import PostDetails from './pages/PostDetails';
 import UserProfilePage from './pages/UserProfilePage';
 
 const MainRoutes = () => {
@@ -14,6 +15,11 @@ const MainRoutes = () => {
       link: "/profile",
       element: <UserProfilePage />,
       id: 2,
+    },
+    {
+      link: "/postdetails",
+      element: <PostDetails />,
+      id: 3,
     }
   ];
   return (

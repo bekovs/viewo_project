@@ -3,3 +3,14 @@
   margin: 0;
   padding: 0;
 }
+
+::-webkit-scrollbar-track {
+	background-color: transparent; /*Цвет скролла*/
+} 
+::-webkit-scrollbar-thumb { 
+	border-radius: 10px; /*Закругление ползунка*/
+	background-color: #E6E6E6; /*Цвет ползунка*/
+} 
+::-webkit-scrollbar{ 
+	width: 10px;  /*Толщина скролла*/
+}
