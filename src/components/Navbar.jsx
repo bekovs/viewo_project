@@ -24,6 +24,10 @@ const style = {
 
 export const LoginContext = React.createContext();
 export const useLogin = () => React.useContext(LoginContext);
+import React from 'react';
+import { useState } from 'react';
+import "../styles/navbar.css"
+import logo from '../assets/icons/logo_black.svg'
 
 const Navbar = () => {
   const [open, setOpen] = React.useState(false);
@@ -76,6 +80,7 @@ const Navbar = () => {
               alt=""
               className="header-logo"
             />
+            <img src={logo} alt="" className='header-logo' />
           </a>
         </div>
         <div className="header__search">

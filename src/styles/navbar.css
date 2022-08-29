@@ -11,7 +11,7 @@ header * {
 
 .header__logo,
 .header-logo {
-  height: 3em;
+  width: 100px;
 }
 
 header ul {

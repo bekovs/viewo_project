@@ -8,8 +8,9 @@ function App() {
     <div className="App">
       <AuthContextProvider>
         <Navbar />
-        <Likes />
-
+        <MainRoutes />
+        <Navbar />
+        {/* <Likes /> */}
         <MainRoutes />
       </AuthContextProvider>
     </div>
