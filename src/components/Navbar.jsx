@@ -101,11 +101,19 @@ const Navbar = () => {
             </div>
           </div>
 
-          <div className="header__login">
+          <div
+            className="header__login"
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
             <button className="header__upload-btn">+ Upload</button>
             {localStorage.getItem("username") ? (
               <div>
                 <button
+                  style={{ marginLeft: "10%" }}
                   aria-describedby={id}
                   type="button"
                   onClick={handleClick}
