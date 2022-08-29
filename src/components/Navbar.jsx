@@ -7,9 +7,10 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { TextField } from "@mui/material";
 import { useAuth } from "../AuthContextProvider";
-import logo from '../assets/icons/logo_black.svg'
+import logo from "../assets/icons/logo_black.svg";
 
 import Popper from "@mui/material/Popper";
+import { useNavigate } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -39,6 +40,7 @@ const Navbar = () => {
   const [password, SetPassword] = useState();
   const [username, SetUsername] = useState();
   const [passwordConfirm, SetPasswordConfirm] = useState();
+  const navigate = useNavigate();
 
   // console.log(email, password, username, passwordConfirm);
 
@@ -67,12 +69,14 @@ const Navbar = () => {
   const openPopper = Boolean(anchorEl);
   const id = openPopper ? "simple-popper" : undefined;
 
+  console.log(anchorEl);
+
   return (
     <header>
       <div className="container">
         <div className="header__logo">
           <a>
-            <img src={logo} alt="" className='header-logo' />
+            <img src={logo} alt="" className="header-logo" />
           </a>
         </div>
         <div className="header__search">
@@ -110,7 +114,14 @@ const Navbar = () => {
                 </button>
                 <Popper id={id} open={openPopper} anchorEl={anchorEl}>
                   <Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>
-                    <Button onClick={logout}>Sign out</Button>
+                    <Button
+                      onClick={() => {
+                        logout();
+                        navigate("/");
+                      }}
+                    >
+                      Sign out
+                    </Button>
                   </Box>
                 </Popper>
               </div>
@@ -193,7 +204,11 @@ const Navbar = () => {
                 <Button
                   sx={{ marginTop: "20%" }}
                   style={{ backgroundColor: "red", color: "white" }}
-                  onClick={handleRegister}
+                  onClick={() => {
+                    handleRegister();
+                    navigate("/");
+                    handleClose();
+                  }}
                 >
                   Submit
                 </Button>
@@ -254,7 +269,11 @@ const Navbar = () => {
                 <Button
                   sx={{ marginTop: "20%" }}
                   style={{ backgroundColor: "red", color: "white" }}
-                  onClick={handleLogin}
+                  onClick={() => {
+                    handleLogin();
+                    navigate("/");
+                    handleCloseLog();
+                  }}
                 >
                   Submit
                 </Button>
