@@ -13,6 +13,7 @@ header * {
 .header-logo {
   height: 3em;
   cursor: pointer;
+  width: 100px;
 }
 
 header ul {
@@ -54,7 +55,7 @@ header button {
 }
 
 .header__search {
-  background-color: #F1F1F2;
+  background-color: #f1f1f2;
   border-radius: 100px;
   display: flex;
   align-items: stretch;
@@ -78,12 +79,11 @@ header button {
   background-color: rgba(22, 24, 35, 0.03);
 }
 
-
 .header__upload-btn {
   border: 1px solid rgba(22, 24, 35, 0.12);
   align-self: stretch;
-  padding: .6em 1.3em;
-  border-radius: .5em;
+  padding: 0.6em 1.3em;
+  border-radius: 0.5em;
   cursor: pointer;
 }
 
@@ -102,12 +102,12 @@ header button {
 }
 
 .header__btn-login {
-  background-color: #FF6E91;
-  color: #FFF;
+  background-color: #ff6e91;
+  color: #fff;
   border-radius: 0.5em;
-  padding: .6em 1.3em;
+  padding: 0.6em 1.3em;
   cursor: pointer;
-  border: 1px solid #FF6E91;
+  border: 1px solid #ff6e91;
   margin-left: 20px;
 }
 
@@ -133,7 +133,7 @@ header button {
   width: 2em;
 }
 
-.header__profile_section>div {
+.header__profile_section > div {
   margin-right: 0.8em;
   margin-left: 1.2em;
 }
@@ -141,40 +141,37 @@ header button {
 .modal-profile {
   width: 200px;
   position: absolute;
-  top: 1.5em;
-  background-color: #FFF;
+  top: 30px;
+  background-color: #fff;
   right: 0;
 }
 
 header .modal-profile ul {
-  padding: .5em 0;
-  border-radius: .5em;
+  padding: 0.5em 0;
+  border-radius: 0.5em;
   box-shadow: 0px 0px 24px 5px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
 header .modal-profile li a {
-  padding: .4em 1em;
+  padding: 0.4em 1em;
   display: block;
   transition: 100ms;
   cursor: pointer;
 }
 
 header .modal-profile li a:hover {
-  background-color: #F6F8FF;
+  background-color: #f6f8ff;
 }
 
 .modal-profile {
   display: none;
 }
 
-.header__profile-avatar:hover~.modal-profile,
+.user:hover ~ .modal-profile,
 .modal-profile:hover {
   display: block;
 }
-
-
-
 
 @media screen and (max-width: 768px) {
   .header__search {

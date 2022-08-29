@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import ChatPage from './pages/ChatPage';
@@ -24,11 +25,9 @@ const MainRoutes = () => {
   ];
   return (
     <Routes>
-      {
-        PUBLIC_ROUTES.map((route) => (
-          <Route path={route.link} element={route.element} key={route.id}/>
-        ))
-      }
+      {PUBLIC_ROUTES.map((route) => (
+        <Route path={route.link} element={route.element} key={route.id} />
+      ))}
     </Routes>
   );
 };
