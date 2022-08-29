@@ -77,7 +77,7 @@ const Navbar = () => {
         <div className="header__logo">
           <a onClick={() => navigate("/")}>
             <img src={logo} alt="" className="header-logo" />
-          <a>
+          </a>
         </div>
         <div className="header__search">
           <input type="text" placeholder="Search accounts and videos" />
