@@ -1,10 +1,11 @@
 import React from 'react';
 import ProfileVideoCard from '../components/ProfileVideoCard';
+import SideBar from '../components/SideBar';
 import "../styles/userProfilePage.css"
 
 const UserProfilePage = () => {
   return <div id='wrapper' style={{ display: "flex" }}>
-    <aside style={{ width: "20vw",  backgroundColor: "green" }}></aside>
+    <SideBar />
     <main style={{ width: "80vw",  backgroundColor: "#FEC9DD" }} className="profile__block">
       <div className="profile__header">
         <div className="profile__header_top">

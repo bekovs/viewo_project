@@ -218,3 +218,11 @@
 .active {
   color:#ff5b81;
 }
+
+video::-webkit-media-controls-fullscreen-button {
+  display: none;
+}
+
+video::-webkit-full-page-media::-webkit-media-controls-panel {
+  display: none;
+}

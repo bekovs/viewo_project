@@ -15,7 +15,7 @@ const PostCard = ({vid}) => {
         <button>Follow</button>
       </div>
       <div className='post-info'>
-        <video src={vid} loop autoPlay controls>
+        <video src={vid} loop disablePictureInPicture controls>
           Your browser does not support the video tag.
         </video>
       </div>

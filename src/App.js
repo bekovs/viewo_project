@@ -1,15 +1,17 @@
-import AuthContextProvider from "./AuthContextProvider";
 import Likes from "./components/Likes";
-
 import Navbar from "./components/Navbar";
+import AuthContextProvider from "./context/AuthContextProvider";
+import PostContextProvider from "./context/PostContextProvider";
 import MainRoutes from "./MainRoutes";
 function App() {
   return (
     <div className="App">
       <AuthContextProvider>
-        <Navbar />
-        {/* <Likes /> */}
-        <MainRoutes />
+        <PostContextProvider>
+          <Navbar />
+          {/* <Likes /> */}
+          <MainRoutes />
+        </PostContextProvider>
       </AuthContextProvider>
     </div>
   );

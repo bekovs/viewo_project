@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { TextField } from "@mui/material";
-import { useAuth } from "../AuthContextProvider";
+import { useAuth } from "../context/AuthContextProvider";
 import logo from "../assets/icons/logo_black.svg";
 
 import Popper from "@mui/material/Popper";
@@ -68,8 +68,6 @@ const Navbar = () => {
 
   const openPopper = Boolean(anchorEl);
   const id = openPopper ? "simple-popper" : undefined;
-
-  console.log(anchorEl);
 
   return (
     <header>
