@@ -5,6 +5,10 @@
   padding: 0;
   font-family: 'Open Sans';
 }
+.link:hover {
+  color: blue;
+  cursor: pointer;
+}
 
 ::-webkit-scrollbar {
   width: 8px;
