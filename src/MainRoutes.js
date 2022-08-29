@@ -1,6 +1,9 @@
-import React from "react";
-import { Route, Routes } from "react-router-dom";
-import HomePage from "./pages/HomePage";
+
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import ChatPage from './pages/ChatPage';
+import HomePage from './pages/HomePage';
+import UserProfilePage from './pages/UserProfilePage';
 
 const MainRoutes = () => {
   const PUBLIC_ROUTES = [
@@ -9,6 +12,16 @@ const MainRoutes = () => {
       element: <HomePage />,
       id: 1,
     },
+    {
+      link: "/profile",
+      element: <UserProfilePage />,
+      id: 2,
+    },
+    {
+      link: "/chats",
+      element: <ChatPage />,
+      id: 3,
+    }
   ];
   return (
     <Routes>

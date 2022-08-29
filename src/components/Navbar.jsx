@@ -75,9 +75,9 @@ const Navbar = () => {
     <header>
       <div className="container">
         <div className="header__logo">
-          <a>
+          <a onClick={() => navigate("/")}>
             <img src={logo} alt="" className="header-logo" />
-          </a>
+          <a>
         </div>
         <div className="header__search">
           <input type="text" placeholder="Search accounts and videos" />
@@ -86,7 +86,7 @@ const Navbar = () => {
 
         <div className="header__block-right">
           <div className="header__profile_section">
-            <button className="header__upload-btn">+ Upload</button>
+            <button className="header__upload-btn">+ <span>Upload</span></button>
             <div className="header__chat-icon">
               <img
                 src="https://play-lh.googleusercontent.com/cF_oWC9Io_I9smEBhjhUHkOO6vX5wMbZJgFpGny4MkMMtz25iIJEh2wASdbbEN7jseAx"
@@ -100,7 +100,6 @@ const Navbar = () => {
               />
             </div>
           </div>
-
           <div
             className="header__login"
             style={{
