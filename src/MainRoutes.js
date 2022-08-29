@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import ChatPage from './pages/ChatPage';
 import HomePage from './pages/HomePage';
-import PostDetails from './pages/PostDetails';
 import UserProfilePage from './pages/UserProfilePage';
 
 const MainRoutes = () => {
@@ -17,8 +17,8 @@ const MainRoutes = () => {
       id: 2,
     },
     {
-      link: "/postdetails",
-      element: <PostDetails />,
+      link: "/chats",
+      element: <ChatPage />,
       id: 3,
     }
   ];
