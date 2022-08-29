@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { TextField } from "@mui/material";
 import { useAuth } from "../AuthContextProvider";
+import logo from '../assets/icons/logo_black.svg'
 
 import Popper from "@mui/material/Popper";
 
@@ -24,10 +25,6 @@ const style = {
 
 export const LoginContext = React.createContext();
 export const useLogin = () => React.useContext(LoginContext);
-import React from 'react';
-import { useState } from 'react';
-import "../styles/navbar.css"
-import logo from '../assets/icons/logo_black.svg'
 
 const Navbar = () => {
   const [open, setOpen] = React.useState(false);
@@ -75,11 +72,6 @@ const Navbar = () => {
       <div className="container">
         <div className="header__logo">
           <a>
-            <img
-              src="https://play-lh.googleusercontent.com/ahJtMe0vfOlAu1XJVQ6rcaGrQBgtrEZQefHy7SXB7jpijKhu1Kkox90XDuH8RmcBOXNn"
-              alt=""
-              className="header-logo"
-            />
             <img src={logo} alt="" className='header-logo' />
           </a>
         </div>
