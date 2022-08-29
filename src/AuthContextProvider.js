@@ -23,6 +23,7 @@ const AuthContextProvider = ({ children }) => {
     formData.append("username", username);
     formData.append("password", password);
     formData.append("password_confirm", password_confirm);
+    console.log(formData)
     try {
       const res = await axios.post(
         `${API}user_account/register/`,
@@ -81,20 +82,31 @@ const AuthContextProvider = ({ children }) => {
   }
 
   const logout = async () => {
-    console.log("do proverki");
     if (localStorage.getItem("token")) {
-      console.log("prowel");
-      let refresh = JSON.parse(localStorage.getItem("token")).refresh;
-      console.log(refresh);
-      let formData = new FormData();
-      formData.append("refresh", refresh);
-      localStorage.removeItem("token");
-      localStorage.removeItem("username");
-      localStorage.removeItem("user");
-      await axios.post(`${API}user_account/logout`, formData);
+      let token = JSON.parse(localStorage.getItem("token"));
+
+      try {
+        const Authorization = `Bearer ${token.access}`;
+
+        console.log(Authorization);
+
+        let formData = new FormData();
+        formData.append("refresh", token.refresh);
+        localStorage.removeItem("token");
+        localStorage.removeItem("username");
+        localStorage.removeItem("user");
+
+        let res = await axios.post(`${API}user_account/logout/`,
+          formData,
+          { headers: { Authorization } }
+        );
+        console.log(res)
+      } catch (error) {
+        console.log(error)
+      }
     } else {
       return;
-    }
+  }
   };
 
   return (

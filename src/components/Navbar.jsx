@@ -40,7 +40,7 @@ const Navbar = () => {
   const [username, SetUsername] = useState();
   const [passwordConfirm, SetPasswordConfirm] = useState();
 
-  console.log(email, password, username, passwordConfirm);
+  // console.log(email, password, username, passwordConfirm);
 
   function handleRegister() {
     register(email, username, password, passwordConfirm);
