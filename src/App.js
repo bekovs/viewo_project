@@ -1,17 +1,22 @@
+import AuthContextProvider from "./AuthContextProvider";
+import ChatContextProvider from "./ChatContextProvider";
 import Likes from "./components/Likes";
 import Navbar from "./components/Navbar";
 import AuthContextProvider from "./context/AuthContextProvider";
 import PostContextProvider from "./context/PostContextProvider";
 import MainRoutes from "./MainRoutes";
+
 function App() {
   return (
-    <div className="App">
+    <div className="App">    
       <AuthContextProvider>
-        <PostContextProvider>
-          <Navbar />
-          {/* <Likes /> */}
-          <MainRoutes />
-        </PostContextProvider>
+        <ChatContextProvider>
+          <PostContextProvider>
+            <Navbar />
+            {/* <Likes /> */}
+            <MainRoutes />
+          </PostContextProvider>
+        </ChatContextProvider>
       </AuthContextProvider>
     </div>
   );
