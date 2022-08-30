@@ -6,11 +6,11 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { TextField } from "@mui/material";
-import { useAuth } from "../AuthContextProvider";
+import { useAuth } from "../context/AuthContextProvider";
 import logo from "../assets/icons/logo_black.svg";
 
 import Popper from "@mui/material/Popper";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -69,8 +69,6 @@ const Navbar = () => {
   const openPopper = Boolean(anchorEl);
   const id = openPopper ? "simple-popper" : undefined;
 
-  console.log(anchorEl);
-
   return (
     <header>
       <div className="container">
@@ -86,7 +84,9 @@ const Navbar = () => {
 
         <div className="header__block-right">
           <div className="header__profile_section">
-            <button className="header__upload-btn">+ <span>Upload</span></button>
+            <Link to="/create">
+              <button className="header__upload-btn">+ <span>Upload</span></button>
+            </Link>
             <div className="header__chat-icon">
               <img
                 src="https://play-lh.googleusercontent.com/cF_oWC9Io_I9smEBhjhUHkOO6vX5wMbZJgFpGny4MkMMtz25iIJEh2wASdbbEN7jseAx"
