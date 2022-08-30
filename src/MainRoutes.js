@@ -3,6 +3,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import ChatPage from './pages/ChatPage';
 import HomePage from './pages/HomePage';
+import PostCreate from './pages/PostCreate';
 import UserProfilePage from './pages/UserProfilePage';
 
 const MainRoutes = () => {
@@ -21,6 +22,11 @@ const MainRoutes = () => {
       link: "/chats",
       element: <ChatPage />,
       id: 3,
+    },
+    {
+      link: "/upload",
+      element: <PostCreate />,
+      id: 4,
     }
   ];
   return (
