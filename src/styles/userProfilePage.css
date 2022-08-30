@@ -207,7 +207,8 @@
 
 
 
-.profile__own-videos {
+.profile__own-videos,
+.profile__own-likes {
   flex-wrap: wrap;
   justify-content: space-between;
 }
@@ -267,17 +268,20 @@
 }
 
 @media screen and (max-width: 1440px) {
-  #profile_tab-videos:checked~.profile__own-videos {
+  #profile_tab-videos:checked~.profile__own-videos,
+  #profile_tab-likes:checked~ .profile__own-likes {
     grid-template-columns: repeat(5, 19%);
   }
 }
 @media screen and (max-width: 1270px) {
-  #profile_tab-videos:checked~.profile__own-videos {
+  #profile_tab-videos:checked~.profile__own-videos,
+  #profile_tab-likes:checked~ .profile__own-likes {
     grid-template-columns: repeat(4, 23%);
   }
 }
 @media screen and (max-width: 900px) {
-  #profile_tab-videos:checked~.profile__own-videos {
+  #profile_tab-videos:checked~.profile__own-videos,
+  #profile_tab-likes:checked~ .profile__own-likes {
     grid-template-columns: repeat(3, 30%);
   }
 }
@@ -325,10 +329,12 @@
   .profile__tabs label p {
     width: 100%;
   }
-  #profile_tab-videos:checked~.profile__own-videos {
+  #profile_tab-videos:checked~.profile__own-videos,
+  #profile_tab-likes:checked~ .profile__own-likes {
     grid-template-columns: repeat(2, 48%);
   }
-  .profile__own-videos {
+  .profile__own-videos,
+  .profile__own-likes {
     padding: 10px 20px;
   }
   .profile__title-container {
