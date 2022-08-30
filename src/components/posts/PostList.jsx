@@ -1,23 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PostCard from './PostCard';
-import vid from '../../assets/media/road.MOV'
-import vid1 from '../../assets/media/cat.MOV'
 import { usePost } from '../../context/PostContextProvider';
 
 const PostList = () => {
 
-  const { getPosts, addPost } = usePost();
+  const { getPosts, posts } = usePost();
 
   useEffect(() => {
-    getPosts()
+    getPosts();
   }, [])
 
   return (
     <div className='post-list'>
-      <button onClick={()=>addPost()}>add post</button>
-      <PostCard vid={vid}/>
-      <PostCard vid={vid1}/>
-      <PostCard vid={vid}/>
+      {
+        posts.length > 0 ?
+          posts.map((post, index) => (
+            <PostCard post={post} key={index}/>
+          ))
+          :
+          <h3 style={{marginTop: '30px'}}>Loading...</h3>
+      }
     </div>
   );
 };

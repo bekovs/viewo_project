@@ -1,15 +1,30 @@
 import React from 'react';
 import "../styles/HomePage.css";
 import rena from '../assets/images/rena.jpg';
+import { Link, useLocation } from 'react-router-dom';
 
 const SideBar = () => {
+
+  const location = useLocation();
+
+  const activeHeader = (path) => {
+    if (location.pathname == path) {
+      return 'active';
+    }
+  }
 
   return (
     <div className='sidebar'>
         <div className='head-links'>
-          <div className='active'><span>Recommendations</span></div>
-          <div><span>Followed</span></div>
-          <div><span>Favorites</span></div>
+          <Link to="/">
+            <div className={activeHeader('/')}><span>Recommendations</span></div>
+          </Link>
+          <Link to="/upload">
+            <div className={activeHeader('/upload')}><span>Add new post</span></div>
+          </Link>
+          <Link to="/favorites">
+            <div className={activeHeader('/favorites')}><span>Favorites</span></div>
+          </Link>
         </div>
         <div className='head-links rec-accounts'>
           <p>Recommended accounts</p>

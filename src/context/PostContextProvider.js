@@ -20,18 +20,18 @@ const reducer = (state=INIT_STATE, action) => {
   }
 }
 
+const token = localStorage.getItem('token') ? JSON.parse(localStorage.getItem('token')) : "";
+  
+const config = {
+  headers: { 
+    "Content-Type": "multipart/form-data",
+    "Authorization": `Bearer ${token.access}`
+  },
+};
+
 const PostContextProvider = ({ children }) => {
 
   const navigate = useNavigate();
-
-  const token = localStorage.getItem('token') ? JSON.parse(localStorage.getItem('token')) : "";
-  
-  const config = {
-    headers: { 
-      "Content-Type": "multipart/form-data",
-      "Authorization": `Bearer ${token.access}`
-    },
-  };
 
   const [state, dispatch] = useReducer(reducer, INIT_STATE)
 
@@ -47,19 +47,15 @@ const PostContextProvider = ({ children }) => {
   
 
   const addPost = async (newPost) => {
-    let fakePost = {
-      title: "fake post",
-      description: "fake descr",
-      views: 4344,
-      user: 7,
-    }
-    let res = await axios.post(`${API}video/videos/create/`, fakePost, config)
+    newPost.append("user", 7);
+    let res = await axios.post(`${API}video/videos/create/`, newPost, config);
     console.log(res);
   }
 
   const values = {
     getPosts,
     addPost,
+    posts: state.posts,
   }
 
   return (

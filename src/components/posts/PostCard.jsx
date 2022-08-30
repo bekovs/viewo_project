@@ -1,21 +1,21 @@
 import React from 'react';
 import rena from '../../assets/images/rena.jpg'
 
-const PostCard = ({vid}) => {
+const PostCard = ({post}) => {
   return (
     <div className='post'>
       <div className='user-info'>
         <div className='user-info__head'>
-          <img src={rena} alt="avatar" />
+          <img src={post.user_image} alt="avatar" />
           <div>
-            <p className='user-name'>rena228</p>
-            <p className='post-title'>post title</p>
+            <p className='user-name'>{post.user}</p>
+            <p className='post-title'>{post.description}</p>
           </div>
         </div>
         <button>Follow</button>
       </div>
       <div className='post-info'>
-        <video src={vid} loop disablePictureInPicture controls>
+        <video src={post.video} loop disablePictureInPicture controls>
           Your browser does not support the video tag.
         </video>
       </div>
