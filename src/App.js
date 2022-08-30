@@ -1,4 +1,4 @@
-import ChatContextProvider from "./ChatContextProvider";
+import ChatContextProvider from "./context/ChatContextProvider";
 import Likes from "./components/Likes";
 import Navbar from "./components/Navbar";
 import AuthContextProvider from "./context/AuthContextProvider";

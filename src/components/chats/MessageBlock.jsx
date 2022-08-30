@@ -2,7 +2,7 @@ import { YouTube } from '@mui/icons-material';
 import React from 'react';
 import "../../styles/chatPage.css";
 
-const MessageBlock = () => {
+const MessageBlock = ({message}) => {
   const you = {
     username: "Bekzhan",
     email: "oooo@gmail.com",
@@ -35,7 +35,7 @@ const MessageBlock = () => {
             </div>
             <div className="message__block_text-reverse">
               <p title='8/29/2022'>
-                это из годов так 2000
+                {message.message}
               </p>
             </div>
             <span className='message-time'>8/29/2022</span>
