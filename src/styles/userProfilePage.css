@@ -1,16 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-
-
+.sidebar-container {
+  width: 100%;
+}
 
 .profile__block {
   font-size: 16px;
   font-family: Vazirmatn, Arial;
   padding: 32px 24px;
 }
-
-
-
 
 .profile__header {
   margin-bottom: 20px;

@@ -13,8 +13,14 @@ const SideBar = () => {
     }
   }
 
+  const userProfileSideBar = () => {
+    if (location.pathname == "/profile") {
+      return {marginLeft: '15px'}
+    }
+  }
+
   return (
-    <div className='sidebar'>
+    <div className='sidebar' style={userProfileSideBar()}>
         <div className='head-links'>
           <Link to="/">
             <div className={activeHeader('/')}><span>Recommendations</span></div>
