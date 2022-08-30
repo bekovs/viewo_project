@@ -10,7 +10,7 @@ import { useAuth } from "../context/AuthContextProvider";
 import logo from "../assets/icons/logo_black.svg";
 
 import Popper from "@mui/material/Popper";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { usePost } from "../context/PostContextProvider";
 import { useEffect } from "react";
 
@@ -48,6 +48,8 @@ const Navbar = () => {
   const [search, setSearch] = useState(searchParams.get("search") || "");
   const { getPosts } = usePost();
 
+  const location = useLocation();
+
   useEffect(() => {
     setSearchParams({
       search: search,
@@ -59,10 +61,9 @@ const Navbar = () => {
   }, [searchParams]);
 
   useEffect(()=>{
-    setSearchParams({
-      search: '',
-    })
+    setSearchParams({})
   }, [])
+
 
   // console.log(email, password, username, passwordConfirm);
 

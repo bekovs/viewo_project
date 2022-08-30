@@ -1,9 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ChatContactCard from '../components/chats/ChatContactCard';
 import MessageBlock from "../components/chats/MessageBlock"
+import { useChat } from '../context/ChatContextProvider';
 import "../styles/chatPage.css";
 
 const ChatPage = () => {
+
+  const { getChats, sendMessage, chats, getChatDetails, chat_details } = useChat();
+  const [message, setMessage] = useState('');
+
+  useEffect(()=>{
+    getChats()
+  }, []);
 
   const [sendBtn, setSendBtn] = useState("#F1F1F2");
 
@@ -15,6 +23,12 @@ const ChatPage = () => {
       setSendBtn("#F1F1F2")
     }
   }
+
+  const handleLoadChat = () => {
+    getChatDetails();
+  }
+
+  handleLoadChat()
 
   return (
     <div className='chatPage'>
@@ -29,19 +43,14 @@ const ChatPage = () => {
             </h3>
           </div>
           <ul className="left__chat_list">
-            <ChatContactCard />
-            <ChatContactCard />
-            <ChatContactCard />
-            <ChatContactCard />
-            <ChatContactCard />
-            <ChatContactCard />
-            <ChatContactCard />
-            <ChatContactCard />
-            <ChatContactCard />
-            <ChatContactCard />
-            <ChatContactCard />
-            <ChatContactCard />
-            <ChatContactCard />
+            {
+              chats.length ? 
+                chats.map((chat, index) => (
+                  <ChatContactCard chat={chat} key={index}/>
+                ))
+              :
+              <h4>Loading...</h4>
+            }
           </ul>
         </div>
         <div className="right__chat-block">
@@ -58,15 +67,24 @@ const ChatPage = () => {
             </div>
             <div className="chat-block__chat-history">
               <div className="block">
-                <MessageBlock />
-                <MessageBlock />
+                {
+                  chat_details.length ? 
+                  chat_details.map((message, index) => (
+                    <MessageBlock message={message} key={index}/>
+                  ))
+                  :
+                  <h4>loading</h4>
+                }
               </div>
             </div>
             <div className="chat-block__send-block">
               <div className="chat-block__send_input__block">
-                <input type="text" placeholder='Send a message...' onChange={(e) => FuncSendBtn(e.target.value)} />
-                <button >
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 32 32" width="2em" height="2em" data-e2e="message-send" class="tiktok-d7yhdo-StyledSendButton e1823izs2"><path fill={sendBtn} fillRule="evenodd" d="M30.488 4.667A1.333 1.333 0 0029.333 4H2.667a1.333 1.333 0 00-.987 2.23l6.96 7.65c.37.406.948.544 1.46.35l9.667-3.674c.112-.043.163-.025.186-.016a.303.303 0 01.138.13.303.303 0 01.047.184c-.003.023-.012.077-.104.154l-7.936 6.732c-.41.347-.57.905-.41 1.417l3.04 9.67a1.333 1.333 0 002.427.266L30.488 6c.238-.413.238-.92 0-1.333z" clipRule="evenodd"></path></svg>
+                <input type="text" placeholder='Send a message...' onChange={(e) => {
+                  FuncSendBtn(e.target.value)
+                  setMessage(e.target.value)
+                }} />
+                <button onClick={()=>sendMessage(message)}>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 32 32" width="2em" height="2em" data-e2e="message-send" className="tiktok-d7yhdo-StyledSendButton e1823izs2"><path fill={sendBtn} fillRule="evenodd" d="M30.488 4.667A1.333 1.333 0 0029.333 4H2.667a1.333 1.333 0 00-.987 2.23l6.96 7.65c.37.406.948.544 1.46.35l9.667-3.674c.112-.043.163-.025.186-.016a.303.303 0 01.138.13.303.303 0 01.047.184c-.003.023-.012.077-.104.154l-7.936 6.732c-.41.347-.57.905-.41 1.417l3.04 9.67a1.333 1.333 0 002.427.266L30.488 6c.238-.413.238-.92 0-1.333z" clipRule="evenodd"></path></svg>
                 </button>
               </div>
             </div>
