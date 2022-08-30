@@ -84,7 +84,7 @@ const Navbar = () => {
 
         <div className="header__block-right">
           <div className="header__profile_section">
-            <Link to="/create">
+            <Link to="/upload">
               <button className="header__upload-btn">+ <span>Upload</span></button>
             </Link>
             <div className="header__chat-icon">
