@@ -10,7 +10,9 @@ import { useAuth } from "../context/AuthContextProvider";
 import logo from "../assets/icons/logo_black.svg";
 
 import Popper from "@mui/material/Popper";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { usePost } from "../context/PostContextProvider";
+import { useEffect } from "react";
 
 const style = {
   position: "absolute",
@@ -41,6 +43,26 @@ const Navbar = () => {
   const [username, SetUsername] = useState();
   const [passwordConfirm, SetPasswordConfirm] = useState();
   const navigate = useNavigate();
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [search, setSearch] = useState(searchParams.get("search") || "");
+  const { getPosts } = usePost();
+
+  useEffect(() => {
+    setSearchParams({
+      search: search,
+    });
+  }, [search]);
+
+  useEffect(() => {
+    getPosts();
+  }, [searchParams]);
+
+  useEffect(()=>{
+    setSearchParams({
+      search: '',
+    })
+  }, [])
 
   // console.log(email, password, username, passwordConfirm);
 
@@ -78,7 +100,7 @@ const Navbar = () => {
           </a>
         </div>
         <div className="header__search">
-          <input type="text" placeholder="Search accounts and videos" />
+          <input type="text" placeholder="Search..." onChange={(e)=>setSearch(e.target.value)}/>
           <button>Search</button>
         </div>
 
