@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 
 .sidebar-container {
   width: 100%;
@@ -6,10 +6,15 @@
 
 .profile__block {
   font-size: 16px;
-  font-family: Vazirmatn, Arial;
+  font-family: 'Open Sans';
   padding: 32px 24px;
 }
-
+#wrapper {
+  margin-top: 60px;
+}
+.sidebar {
+  max-width: 300px;
+}
 .profile__header {
   margin-bottom: 20px;
 }
@@ -200,7 +205,9 @@
 }
 
 #profile_tab-likes:checked~.profile__own-likes {
-  display: block;
+  display: grid;
+  grid-template-columns: repeat(6, 15%);
+  grid-gap: 25px 5px;
 }
 
 

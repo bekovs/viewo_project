@@ -14,7 +14,6 @@ const Likes = () => {
     }
   }
 
-
   console.log(like)
 
 
@@ -28,7 +27,7 @@ const Likes = () => {
           like ?
             (
               <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-                width="20px" height="20px" viewBox="0 0 1280.000000 1189.000000"
+                width="30px" height="30px" viewBox="0 0 1280.000000 1189.000000"
                 preserveAspectRatio="xMidYMid meet">
                 <g transform="translate(0.000000,1189.000000) scale(0.100000,-0.100000)"
                   fill="red" stroke="none">
@@ -40,7 +39,7 @@ const Likes = () => {
             :
             (
               <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-                width="20px" height="20px" viewBox="0 0 1280.000000 1189.000000"
+                width="30px" height="30px" viewBox="0 0 1280.000000 1189.000000"
                 preserveAspectRatio="xMidYMid meet">
                 <g transform="translate(0.000000,1189.000000) scale(0.100000,-0.100000)"
                   fill="#000">
@@ -50,7 +49,6 @@ const Likes = () => {
             )
         }
       </button>
-      <span>82749</span>
     </div>
   );
 };

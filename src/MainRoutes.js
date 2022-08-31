@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import ChatPage from './pages/ChatPage';
 import HomePage from './pages/HomePage';
 import PostCreate from './pages/PostCreate';
+import PostDetailsPage from './pages/PostDetailsPage';
 import UserProfilePage from './pages/UserProfilePage';
 
 const MainRoutes = () => {
@@ -27,6 +28,11 @@ const MainRoutes = () => {
       link: "/upload",
       element: <PostCreate />,
       id: 4,
+    },
+    {
+      link: "/postdetail",
+      element: <PostDetailsPage />,
+      id: 5,
     }
   ];
   return (

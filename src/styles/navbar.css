@@ -6,6 +6,12 @@ a {
 header {
   box-shadow: rgb(0 0 0 / 12%) 0px 1px 1px;
   height: 60px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  background-color: #FFF;
+  z-index: 999;
   display: flex;
   align-items: center;
 }
@@ -28,7 +34,8 @@ header ul {
 }
 
 header .container {
-  width: 1110px;
+  width: 100%;
+  max-width: 1150px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -102,7 +109,7 @@ header button {
 }
 
 .header__profile_section {
-  display: flex;
+  display: none;
   align-items: center;
 }
 

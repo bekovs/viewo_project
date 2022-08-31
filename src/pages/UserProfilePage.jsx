@@ -5,15 +5,9 @@ import "../styles/userProfilePage.css"
 import rena from '../assets/images/rena.jpg'
 
 const UserProfilePage = () => {
-
-
-  // https://tektonik.herokuapp.com/chat/create/
-
-
-
   return <div id='wrapper' style={{ display: "flex" }}>
     <SideBar />
-    <main style={{ width: "80vw",  backgroundColor: "#FEC9DD" }} className="profile__block">
+    <main style={{ width: "80vw" }} className="profile__block">
       <div className="profile__header">
         <div className="profile__header_top">
           <div className="profile__header-top_card">
@@ -92,7 +86,10 @@ const UserProfilePage = () => {
           <ProfileVideoCard />
         </div>
         <div className="profile__own-likes">
-          User likes
+          <ProfileVideoCard />
+          <ProfileVideoCard />
+          <ProfileVideoCard />
+          <ProfileVideoCard />
         </div>
       </div>
     </main>
