@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import HelpPage from "./pages/HelpPage";
 import HomePage from "./pages/HomePage";
 
 const MainRoutes = () => {
@@ -7,6 +8,11 @@ const MainRoutes = () => {
     {
       link: "/",
       element: <HomePage />,
+      id: 1,
+    },
+    {
+      link: "/help",
+      element: <HelpPage />,
       id: 1,
     },
   ];

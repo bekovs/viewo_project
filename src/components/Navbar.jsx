@@ -93,12 +93,6 @@ const Navbar = () => {
                 alt=""
               />
             </div>
-            <div className="header__profile-avatar">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/768px-Google_%22G%22_Logo.svg.png"
-                alt=""
-              />
-            </div>
           </div>
 
           <div
@@ -109,7 +103,6 @@ const Navbar = () => {
               alignItems: "center",
             }}
           >
-            <button className="header__upload-btn">+ Upload</button>
             {localStorage.getItem("username") ? (
               <div>
                 <button
@@ -121,7 +114,15 @@ const Navbar = () => {
                   {localStorage.getItem("username")}
                 </button>
                 <Popper id={id} open={openPopper} anchorEl={anchorEl}>
-                  <Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>
+                  <Box
+                    sx={{
+                      border: 1,
+                      p: 1,
+                      bgcolor: "background.paper",
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
                     <Button
                       onClick={() => {
                         logout();
@@ -130,6 +131,7 @@ const Navbar = () => {
                     >
                       Sign out
                     </Button>
+                    <Button onClick={navigate("/help")}>help</Button>
                   </Box>
                 </Popper>
               </div>
