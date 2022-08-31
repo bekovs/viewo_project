@@ -1,10 +1,10 @@
-
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import ChatPage from './pages/ChatPage';
-import HomePage from './pages/HomePage';
-import PostCreate from './pages/PostCreate';
-import UserProfilePage from './pages/UserProfilePage';
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import ChatPage from "./pages/ChatPage";
+import HomePage from "./pages/HomePage";
+import HelpPage from "./pages/HelpPage";
+import PostCreate from "./pages/PostCreate";
+import UserProfilePage from "./pages/UserProfilePage";
 
 const MainRoutes = () => {
   const PUBLIC_ROUTES = [
@@ -14,20 +14,25 @@ const MainRoutes = () => {
       id: 1,
     },
     {
+      link: "/help",
+      element: <HelpPage />,
+      id: 2,
+    },
+    {
       link: "/profile",
       element: <UserProfilePage />,
-      id: 2,
+      id: 3,
     },
     {
       link: "/chats",
       element: <ChatPage />,
-      id: 3,
+      id: 4,
     },
     {
       link: "/upload",
       element: <PostCreate />,
-      id: 4,
-    }
+      id: 5,
+    },
   ];
   return (
     <Routes>

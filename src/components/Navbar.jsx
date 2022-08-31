@@ -10,7 +10,12 @@ import { useAuth } from "../context/AuthContextProvider";
 import logo from "../assets/icons/logo_black.svg";
 
 import Popper from "@mui/material/Popper";
-import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 import { usePost } from "../context/PostContextProvider";
 import { useEffect } from "react";
 
@@ -37,7 +42,7 @@ const Navbar = () => {
   const handleOpenLog = () => setOpenLog(true);
   const handleCloseLog = () => setOpenLog(false);
 
-  const { register, login, logout } = useAuth();
+  const { register, login, logout, error, setError } = useAuth();
   const [email, SetEmail] = useState();
   const [password, SetPassword] = useState();
   const [username, SetUsername] = useState();
@@ -57,13 +62,16 @@ const Navbar = () => {
   }, [search]);
 
   useEffect(() => {
+    setError("");
+  }, []);
+
+  useEffect(() => {
     getPosts();
   }, [searchParams]);
 
-  useEffect(()=>{
-    setSearchParams({})
-  }, [])
-
+  useEffect(() => {
+    setSearchParams({});
+  }, []);
 
   // console.log(email, password, username, passwordConfirm);
 
@@ -77,7 +85,6 @@ const Navbar = () => {
 
   function handleLog() {
     handleOpenLog();
-    handleClose();
   }
   function handleSign() {
     handleOpen();
@@ -101,24 +108,24 @@ const Navbar = () => {
           </a>
         </div>
         <div className="header__search">
-          <input type="text" placeholder="Search..." onChange={(e)=>setSearch(e.target.value)}/>
+          <input
+            type="text"
+            placeholder="Search..."
+            onChange={(e) => setSearch(e.target.value)}
+          />
           <button>Search</button>
         </div>
 
         <div className="header__block-right">
           <div className="header__profile_section">
             <Link to="/upload">
-              <button className="header__upload-btn">+ <span>Upload</span></button>
+              <button className="header__upload-btn">
+                + <span>Upload</span>
+              </button>
             </Link>
             <div className="header__chat-icon">
               <img
                 src="https://play-lh.googleusercontent.com/cF_oWC9Io_I9smEBhjhUHkOO6vX5wMbZJgFpGny4MkMMtz25iIJEh2wASdbbEN7jseAx"
-                alt=""
-              />
-            </div>
-            <div className="header__profile-avatar">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/768px-Google_%22G%22_Logo.svg.png"
                 alt=""
               />
             </div>
@@ -131,7 +138,6 @@ const Navbar = () => {
               alignItems: "center",
             }}
           >
-            <button className="header__upload-btn">+ Upload</button>
             {localStorage.getItem("username") ? (
               <div>
                 <button
@@ -143,7 +149,15 @@ const Navbar = () => {
                   {localStorage.getItem("username")}
                 </button>
                 <Popper id={id} open={openPopper} anchorEl={anchorEl}>
-                  <Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>
+                  <Box
+                    sx={{
+                      border: 1,
+                      p: 1,
+                      bgcolor: "background.paper",
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
                     <Button
                       onClick={() => {
                         logout();
@@ -152,11 +166,12 @@ const Navbar = () => {
                     >
                       Sign out
                     </Button>
+                    <Button onClick={() => navigate("/help")}>help</Button>
                   </Box>
                 </Popper>
               </div>
             ) : (
-              <button onClick={handleOpen} className="header__btn-login">
+              <button onClick={handleLog} className="header__btn-login">
                 Log in
               </button>
             )}
@@ -225,7 +240,7 @@ const Navbar = () => {
                 ></TextField>
                 <Typography
                   className="link"
-                  onClick={handleLog}
+                  onClick={handleOpen}
                   style={{ fontSize: "1.6vmin" }}
                 >
                   already have an account?
@@ -237,7 +252,6 @@ const Navbar = () => {
                   onClick={() => {
                     handleRegister();
                     navigate("/");
-                    handleClose();
                   }}
                 >
                   Submit
@@ -296,13 +310,13 @@ const Navbar = () => {
                 >
                   dont have an account?
                 </Typography>
+                {error ? <Typography>{error}</Typography> : null}
                 <Button
                   sx={{ marginTop: "20%" }}
                   style={{ backgroundColor: "red", color: "white" }}
                   onClick={() => {
                     handleLogin();
                     navigate("/");
-                    handleCloseLog();
                   }}
                 >
                   Submit

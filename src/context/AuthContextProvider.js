@@ -23,7 +23,7 @@ const AuthContextProvider = ({ children }) => {
     formData.append("username", username);
     formData.append("password", password);
     formData.append("password_confirm", password_confirm);
-    console.log(formData)
+    console.log(formData);
     try {
       const res = await axios.post(
         `${API}user_account/register/`,
@@ -96,17 +96,16 @@ const AuthContextProvider = ({ children }) => {
         localStorage.removeItem("username");
         localStorage.removeItem("user");
 
-        let res = await axios.post(`${API}user_account/logout/`,
-          formData,
-          { headers: { Authorization } }
-        );
-        console.log(res)
+        let res = await axios.post(`${API}user_account/logout/`, formData, {
+          headers: { Authorization },
+        });
+        console.log(res);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     } else {
       return;
-  }
+    }
   };
 
   return (
@@ -118,6 +117,7 @@ const AuthContextProvider = ({ children }) => {
         logout,
         error,
         user,
+        setError,
       }}
     >
       {children}
