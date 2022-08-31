@@ -1,7 +1,10 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import HelpPage from "./pages/HelpPage";
+import ChatPage from "./pages/ChatPage";
 import HomePage from "./pages/HomePage";
+import HelpPage from "./pages/HelpPage";
+import PostCreate from "./pages/PostCreate";
+import UserProfilePage from "./pages/UserProfilePage";
 
 const MainRoutes = () => {
   const PUBLIC_ROUTES = [
@@ -13,7 +16,22 @@ const MainRoutes = () => {
     {
       link: "/help",
       element: <HelpPage />,
-      id: 1,
+      id: 2,
+    },
+    {
+      link: "/profile",
+      element: <UserProfilePage />,
+      id: 3,
+    },
+    {
+      link: "/chats",
+      element: <ChatPage />,
+      id: 4,
+    },
+    {
+      link: "/upload",
+      element: <PostCreate />,
+      id: 5,
     },
   ];
   return (

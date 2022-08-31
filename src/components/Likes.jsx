@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Like from "../immg/Heart.svg"
 
 const Likes = () => {
 

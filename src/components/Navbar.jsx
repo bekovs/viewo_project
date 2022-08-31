@@ -6,11 +6,18 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { TextField } from "@mui/material";
-import { useAuth } from "../AuthContextProvider";
+import { useAuth } from "../context/AuthContextProvider";
 import logo from "../assets/icons/logo_black.svg";
 
 import Popper from "@mui/material/Popper";
-import { useNavigate } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
+import { usePost } from "../context/PostContextProvider";
+import { useEffect } from "react";
 
 const style = {
   position: "absolute",
@@ -35,12 +42,36 @@ const Navbar = () => {
   const handleOpenLog = () => setOpenLog(true);
   const handleCloseLog = () => setOpenLog(false);
 
-  const { register, login, logout } = useAuth();
+  const { register, login, logout, error, setError } = useAuth();
   const [email, SetEmail] = useState();
   const [password, SetPassword] = useState();
   const [username, SetUsername] = useState();
   const [passwordConfirm, SetPasswordConfirm] = useState();
   const navigate = useNavigate();
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [search, setSearch] = useState(searchParams.get("search") || "");
+  const { getPosts } = usePost();
+
+  const location = useLocation();
+
+  useEffect(() => {
+    setSearchParams({
+      search: search,
+    });
+  }, [search]);
+
+  useEffect(() => {
+    setError("");
+  }, []);
+
+  useEffect(() => {
+    getPosts();
+  }, [searchParams]);
+
+  useEffect(() => {
+    setSearchParams({});
+  }, []);
 
   // console.log(email, password, username, passwordConfirm);
 
@@ -54,7 +85,6 @@ const Navbar = () => {
 
   function handleLog() {
     handleOpenLog();
-    handleClose();
   }
   function handleSign() {
     handleOpen();
@@ -69,24 +99,30 @@ const Navbar = () => {
   const openPopper = Boolean(anchorEl);
   const id = openPopper ? "simple-popper" : undefined;
 
-  console.log(anchorEl);
-
   return (
     <header>
       <div className="container">
         <div className="header__logo">
-          <a>
+          <a onClick={() => navigate("/")}>
             <img src={logo} alt="" className="header-logo" />
           </a>
         </div>
         <div className="header__search">
-          <input type="text" placeholder="Search accounts and videos" />
+          <input
+            type="text"
+            placeholder="Search..."
+            onChange={(e) => setSearch(e.target.value)}
+          />
           <button>Search</button>
         </div>
 
         <div className="header__block-right">
           <div className="header__profile_section">
-            <button className="header__upload-btn">+ Upload</button>
+            <Link to="/upload">
+              <button className="header__upload-btn">
+                + <span>Upload</span>
+              </button>
+            </Link>
             <div className="header__chat-icon">
               <img
                 src="https://play-lh.googleusercontent.com/cF_oWC9Io_I9smEBhjhUHkOO6vX5wMbZJgFpGny4MkMMtz25iIJEh2wASdbbEN7jseAx"
@@ -94,7 +130,6 @@ const Navbar = () => {
               />
             </div>
           </div>
-
           <div
             className="header__login"
             style={{
@@ -131,12 +166,12 @@ const Navbar = () => {
                     >
                       Sign out
                     </Button>
-                    <Button onClick={navigate("/help")}>help</Button>
+                    <Button onClick={() => navigate("/help")}>help</Button>
                   </Box>
                 </Popper>
               </div>
             ) : (
-              <button onClick={handleOpen} className="header__btn-login">
+              <button onClick={handleLog} className="header__btn-login">
                 Log in
               </button>
             )}
@@ -205,7 +240,7 @@ const Navbar = () => {
                 ></TextField>
                 <Typography
                   className="link"
-                  onClick={handleLog}
+                  onClick={handleOpen}
                   style={{ fontSize: "1.6vmin" }}
                 >
                   already have an account?
@@ -217,7 +252,6 @@ const Navbar = () => {
                   onClick={() => {
                     handleRegister();
                     navigate("/");
-                    handleClose();
                   }}
                 >
                   Submit
@@ -276,13 +310,13 @@ const Navbar = () => {
                 >
                   dont have an account?
                 </Typography>
+                {error ? <Typography>{error}</Typography> : null}
                 <Button
                   sx={{ marginTop: "20%" }}
                   style={{ backgroundColor: "red", color: "white" }}
                   onClick={() => {
                     handleLogin();
                     navigate("/");
-                    handleCloseLog();
                   }}
                 >
                   Submit
