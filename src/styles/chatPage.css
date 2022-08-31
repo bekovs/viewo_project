@@ -256,3 +256,8 @@
   font-size: 10px;
   align-self: end;
 }
+
+h2 {
+  margin: 10% 20%;
+  width: 100%;
+}

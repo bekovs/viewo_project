@@ -19,7 +19,7 @@ const MainRoutes = () => {
       id: 2,
     },
     {
-      link: "/profile",
+      link: "/profile/:id",
       element: <UserProfilePage />,
       id: 3,
     },

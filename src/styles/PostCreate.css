@@ -18,3 +18,7 @@
   flex-direction: column;
   width: 100%;
 }
+
+input {
+  padding: 1vmin;
+}

@@ -19,17 +19,17 @@ const MessageBlock = ({message}) => {
   return (
     <>
       {
-        (localStorage.getItem("username") == you.username) ? (
+        (localStorage.getItem("username") == message.receiver) ? (
           <div className="message__block">
             <div className="message__block-avatar">
               <img src="https://p16-sign-sg.tiktokcdn.com/aweme/100x100/tos-alisg-avt-0068/461e6d4490e2f1a9377f5df6bc530aa9.jpeg?x-expires=1662008400&x-signature=Kn%2BN6mnsE3IOiVWTvUmShpKhXOE%3D" alt="" />
             </div>
             <div className="message__block_text">
               <p title='8/29/2022'>
-                это из годов так 2000 lorem500
+                {message.message}
               </p>
             </div>
-            <span className='message-time'>8/29/2022</span>
+            <span className='message-time'>{getDateAndTime(message.date)}</span>
           </div>
         ) : (
           <div className="message__block-reverse">

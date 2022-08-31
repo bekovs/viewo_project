@@ -10,10 +10,10 @@ const chatContactCard = ({ chat }) => {
       </div>
       <div className="chat__list-info">
         <div className="chat__companion_username">
-          <b>{chat[0].receiver}</b>
+          <b>{chat.length ? chat[0].receiver : ""}</b>
         </div>
         <div className="chat__message_preview">
-          <div className='chat__message_preview-item1'>{chat[0].message}</div> <span className='chat__message_preview-item2'>{getDate(chat[0].date)}</span>
+          <div className='chat__message_preview-item1'>{chat.length ? chat[0].message : ""}</div> <span className='chat__message_preview-item2'>{chat.length ? getDate(chat[0].date) : ""}</span>
         </div>
       </div>
     </li>

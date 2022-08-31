@@ -47,8 +47,9 @@ const ChatContextProvider = ({ children }) => {
   }
 
   const createChat = async (id) => {
+    console.log('creating chat with ' + id)
     let chat = {
-      receiver: 1, // replace with id
+      receiver: id,
     }
 
     let res = await axios.post(`${API}chat/create/`, chat, config)
