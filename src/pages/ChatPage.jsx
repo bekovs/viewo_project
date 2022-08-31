@@ -57,7 +57,7 @@ const ChatPage = () => {
                   <img loading="lazy" src="https://p16-sign-sg.tiktokcdn.com/aweme/100x100/tos-alisg-avt-0068/461e6d4490e2f1a9377f5df6bc530aa9.jpeg?x-expires=1661965200&amp;x-signature=wu4kVib%2B4dJkg7xEWj124jsKVUU%3D" />
                 </div>
                 <div className="companion__profile-block_username">
-                  <b>T</b>
+                  <b>{chat_details.length ? chat_details[0].receiver : "Direct messages"}</b>
                 </div>
               </a>
             </div>
