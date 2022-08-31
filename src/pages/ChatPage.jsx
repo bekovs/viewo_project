@@ -24,12 +24,6 @@ const ChatPage = () => {
     }
   }
 
-  const handleLoadChat = () => {
-    getChatDetails();
-  }
-
-  handleLoadChat()
-
   return (
     <div className='chatPage'>
       <div className="container">
@@ -46,7 +40,9 @@ const ChatPage = () => {
             {
               chats.length ? 
                 chats.map((chat, index) => (
-                  <ChatContactCard chat={chat} key={index}/>
+                  <div key={index} onClick={()=>getChatDetails(chat[0].chat_id)}>
+                    <ChatContactCard chat={chat} key={index}/>
+                  </div>
                 ))
               :
               <h4>Loading...</h4>
@@ -73,7 +69,7 @@ const ChatPage = () => {
                     <MessageBlock message={message} key={index}/>
                   ))
                   :
-                  <h4>loading</h4>
+                  <></>
                 }
               </div>
             </div>

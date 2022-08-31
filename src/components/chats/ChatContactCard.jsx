@@ -1,4 +1,5 @@
 import React from 'react';
+import { getDate } from '../../helpers/funcs'
 
 const chatContactCard = ({ chat }) => {
 
@@ -12,7 +13,7 @@ const chatContactCard = ({ chat }) => {
           <b>{chat[0].receiver}</b>
         </div>
         <div className="chat__message_preview">
-          <div className='chat__message_preview-item1'>{chat[0].message}</div> <span className='chat__message_preview-item2'>20.10.2022</span>
+          <div className='chat__message_preview-item1'>{chat[0].message}</div> <span className='chat__message_preview-item2'>{getDate(chat[0].date)}</span>
         </div>
       </div>
     </li>

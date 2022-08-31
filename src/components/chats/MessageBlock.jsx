@@ -1,6 +1,8 @@
 import { YouTube } from '@mui/icons-material';
 import React from 'react';
 import "../../styles/chatPage.css";
+import { getDateAndTime } from '../../helpers/funcs'
+
 
 const MessageBlock = ({message}) => {
   const you = {
@@ -13,6 +15,7 @@ const MessageBlock = ({message}) => {
     email: "companion@gmail.com",
     image: "https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80"
   }
+
   return (
     <>
       {
@@ -38,7 +41,7 @@ const MessageBlock = ({message}) => {
                 {message.message}
               </p>
             </div>
-            <span className='message-time'>8/29/2022</span>
+            <span className='message-time'>{getDateAndTime(message.date)}</span>
           </div>
         )
       }

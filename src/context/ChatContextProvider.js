@@ -46,9 +46,9 @@ const ChatContextProvider = ({ children }) => {
       });
   }
 
-  const createChat = async () => {
+  const createChat = async (id) => {
     let chat = {
-      receiver: 1
+      receiver: 1, // replace with id
     }
 
     let res = await axios.post(`${API}chat/create/`, chat, config)
@@ -56,21 +56,21 @@ const ChatContextProvider = ({ children }) => {
     navigate('/chats')
   }
 
-  const getChatDetails = async () => {
-    let res = await axios(`${API}chat/list/${1}/`, config)
+  const getChatDetails = async (id) => {
+    let res = await axios(`${API}chat/list/${id}/`, config)
     dispatch({
       type: ACTIONS.GET_CHAT_DETAILS,
       payload: res.data,
     })
   }
 
-  const sendMessage = async (messageText) => {
+  const sendMessage = async (messageText, receiver_id, chat_id) => {
     let newMessage = {
       message: messageText,
-      receiver: 4,
+      receiver: 4, // replace with receiver_id
     }
 
-    let res = await axios.post(`${API}chat/messages/create/${1}/`, newMessage, config);
+    let res = await axios.post(`${API}chat/messages/create/${1}/`, newMessage, config); //replace with chat_id
     console.log(res)
   }
 
