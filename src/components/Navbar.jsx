@@ -10,7 +10,14 @@ import { useAuth } from "../context/AuthContextProvider";
 import logo from "../assets/icons/logo_black.svg";
 
 import Popper from "@mui/material/Popper";
-import { Link, useNavigate } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
+import { usePost } from "../context/PostContextProvider";
+import { useEffect } from "react";
 
 const style = {
   position: "absolute",
@@ -35,12 +42,36 @@ const Navbar = () => {
   const handleOpenLog = () => setOpenLog(true);
   const handleCloseLog = () => setOpenLog(false);
 
-  const { register, login, logout } = useAuth();
+  const { register, login, logout, error, setError } = useAuth();
   const [email, SetEmail] = useState();
   const [password, SetPassword] = useState();
   const [username, SetUsername] = useState();
   const [passwordConfirm, SetPasswordConfirm] = useState();
   const navigate = useNavigate();
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [search, setSearch] = useState(searchParams.get("search") || "");
+  const { getPosts } = usePost();
+
+  const location = useLocation();
+
+  useEffect(() => {
+    setSearchParams({
+      search: search,
+    });
+  }, [search]);
+
+  useEffect(() => {
+    setError("");
+  }, []);
+
+  useEffect(() => {
+    getPosts();
+  }, [searchParams]);
+
+  useEffect(() => {
+    setSearchParams({});
+  }, []);
 
   // console.log(email, password, username, passwordConfirm);
 
@@ -54,7 +85,6 @@ const Navbar = () => {
 
   function handleLog() {
     handleOpenLog();
-    handleClose();
   }
   function handleSign() {
     handleOpen();
@@ -70,43 +100,86 @@ const Navbar = () => {
   const id = openPopper ? "simple-popper" : undefined;
 
   return (
-    <>
-      <header>
-        <div className="container">
-          <div className="header__logo">
-            <a onClick={() => navigate("/")}>
-              <img src={logo} alt="" className="header-logo" />
-            </a>
-          </div>
-          <div className="header__search">
-            <input type="text" placeholder="Search accounts and videos" />
-            <button>Search</button>
-          </div>
-          <div className="header__block-right">
-            <div className="header__profile_section">
-              <Link to="/create">
-                <button className="header__upload-btn">+ <span>Upload</span></button>
-              </Link>
-              <div className="header__chat-icon">
-                <img
-                  src="https://play-lh.googleusercontent.com/cF_oWC9Io_I9smEBhjhUHkOO6vX5wMbZJgFpGny4MkMMtz25iIJEh2wASdbbEN7jseAx"
-                  alt=""
-                />
-              </div>
-              <div className="header__profile-avatar">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/768px-Google_%22G%22_Logo.svg.png"
-                  alt=""
-                />
-              </div>
+    <header>
+      <div className="container">
+        <div className="header__logo">
+          <a onClick={() => navigate("/")}>
+            <img src={logo} alt="" className="header-logo" />
+          </a>
+        </div>
+        <div className="header__search">
+          <input
+            type="text"
+            placeholder="Search..."
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <button>Search</button>
+        </div>
+
+        <div className="header__block-right">
+          <div className="header__profile_section">
+            <Link to="/upload">
+              <button className="header__upload-btn">
+                + <span>Upload</span>
+              </button>
+            </Link>
+            <div className="header__chat-icon">
+              <img
+                src="https://play-lh.googleusercontent.com/cF_oWC9Io_I9smEBhjhUHkOO6vX5wMbZJgFpGny4MkMMtz25iIJEh2wASdbbEN7jseAx"
+                alt=""
+              />
             </div>
-            <div
-              className="header__login"
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-              }}
+          </div>
+          <div
+            className="header__login"
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            {localStorage.getItem("username") ? (
+              <div>
+                <button
+                  style={{ marginLeft: "10%" }}
+                  aria-describedby={id}
+                  type="button"
+                  onClick={handleClick}
+                >
+                  {localStorage.getItem("username")}
+                </button>
+                <Popper id={id} open={openPopper} anchorEl={anchorEl}>
+                  <Box
+                    sx={{
+                      border: 1,
+                      p: 1,
+                      bgcolor: "background.paper",
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <Button
+                      onClick={() => {
+                        logout();
+                        navigate("/");
+                      }}
+                    >
+                      Sign out
+                    </Button>
+                    <Button onClick={() => navigate("/help")}>help</Button>
+                  </Box>
+                </Popper>
+              </div>
+            ) : (
+              <button onClick={handleLog} className="header__btn-login">
+                Log in
+              </button>
+            )}
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
             >
               <button className="header__upload-btn">+ Upload</button>
               {localStorage.getItem("username") ? (
@@ -143,15 +216,66 @@ const Navbar = () => {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
               >
-                <Box
-                  sx={style}
-                  style={{
-                    width: "400px",
-                    height: "600px",
-                    border: "none",
-                    borderRadius: "5%",
-                    display: "flex",
-                    flexDirection: "column",
+                <Typography
+                  sx={{ margin: "0 auto" }}
+                  id="modal-modal-title"
+                  variant="h6"
+                  component="h2"
+                >
+                  Sign up
+                </Typography>
+                <Typography>email</Typography>
+                <TextField
+                  value={email}
+                  onChange={(e) => SetEmail(e.target.value)}
+                  className="input"
+                  sx={{ paddingBottom: "5%" }}
+                  placeholder="email"
+                ></TextField>
+                <Typography>username</Typography>
+                <TextField
+                  value={username}
+                  onChange={(e) => SetUsername(e.target.value)}
+                  className="input"
+                  sx={{ paddingBottom: "5%" }}
+                  placeholder="username"
+                ></TextField>
+                <Typography onChange={(e) => SetPassword(e.target.value)}>
+                  password
+                </Typography>
+                <TextField
+                  value={password}
+                  onChange={(e) => SetPassword(e.target.value)}
+                  className="input"
+                  sx={{ paddingBottom: "5%" }}
+                  placeholder="password"
+                ></TextField>
+                <Typography
+                  onChange={(e) => SetPasswordConfirm(e.target.value)}
+                >
+                  confirm password
+                </Typography>
+                <TextField
+                  value={passwordConfirm}
+                  onChange={(e) => SetPasswordConfirm(e.target.value)}
+                  className="input"
+                  sx={{ paddingBottom: "5%" }}
+                  placeholder="confirm password"
+                ></TextField>
+                <Typography
+                  className="link"
+                  onClick={handleOpen}
+                  style={{ fontSize: "1.6vmin" }}
+                >
+                  already have an account?
+                </Typography>
+
+                <Button
+                  sx={{ marginTop: "20%" }}
+                  style={{ backgroundColor: "red", color: "white" }}
+                  onClick={() => {
+                    handleRegister();
+                    navigate("/");
                   }}
                 >
                   <Typography
@@ -229,15 +353,46 @@ const Navbar = () => {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
               >
-                <Box
-                  sx={style}
-                  style={{
-                    width: "400px",
-                    height: "600px",
-                    border: "none",
-                    borderRadius: "5%",
-                    display: "flex",
-                    flexDirection: "column",
+                <Typography
+                  sx={{ margin: "0 auto" }}
+                  id="modal-modal-title"
+                  variant="h6"
+                  component="h2"
+                >
+                  Sign in
+                </Typography>
+                <Typography>email</Typography>
+                <TextField
+                  value={email}
+                  onChange={(e) => SetEmail(e.target.value)}
+                  className="input"
+                  sx={{ paddingBottom: "5%" }}
+                  placeholder="email"
+                ></TextField>
+                <Typography onChange={(e) => SetPassword(e.target.value)}>
+                  password
+                </Typography>
+                <TextField
+                  value={password}
+                  onChange={(e) => SetPassword(e.target.value)}
+                  className="input"
+                  sx={{ paddingBottom: "5%" }}
+                  placeholder="password"
+                ></TextField>
+                <Typography
+                  className="link"
+                  onClick={handleSign}
+                  style={{ fontSize: "1.6vmin" }}
+                >
+                  dont have an account?
+                </Typography>
+                {error ? <Typography>{error}</Typography> : null}
+                <Button
+                  sx={{ marginTop: "20%" }}
+                  style={{ backgroundColor: "red", color: "white" }}
+                  onClick={() => {
+                    handleLogin();
+                    navigate("/");
                   }}
                 >
                   <Typography

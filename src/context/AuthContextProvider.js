@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const authContext = React.createContext();
@@ -10,6 +10,7 @@ const API = "https://tektonik.herokuapp.com/";
 const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState("");
   const [error, setError] = useState("");
+  const [users, setUsers] = useState([]);
 
   const navigate = useNavigate();
 
@@ -23,7 +24,7 @@ const AuthContextProvider = ({ children }) => {
     formData.append("username", username);
     formData.append("password", password);
     formData.append("password_confirm", password_confirm);
-    console.log(formData)
+    console.log(formData);
     try {
       const res = await axios.post(
         `${API}user_account/register/`,
@@ -38,7 +39,6 @@ const AuthContextProvider = ({ children }) => {
   };
 
   const login = async (email, password) => {
-    // console.log(user);
     let formData = new FormData();
     formData.append("email", email);
     formData.append("password", password);
@@ -48,38 +48,14 @@ const AuthContextProvider = ({ children }) => {
       navigate("/");
       console.log(res.data);
       localStorage.setItem("token", JSON.stringify(res.data));
-      localStorage.setItem("username", email);
+      localStorage.setItem("email", email);
+      getProfile();
+      localStorage.setItem("username", user)
     } catch (error) {
       console.log(error);
       setError("Wrong username or password", error);
     }
   };
-
-  async function checkAuth() {
-    let token = JSON.parse(localStorage.getItem("token"));
-
-    try {
-      const Authorization = `Bearer ${token.access}`;
-
-      let res = await axios.post(
-        `${API}api/token/refresh/`,
-        {
-          refresh: token.refresh,
-        },
-        { headers: { Authorization } }
-      );
-
-      localStorage.setItem(
-        "token",
-        JSON.stringify({ refresh: token.refresh, access: res.data.access })
-      );
-
-      let username = localStorage.getItem("username");
-      setUser(username);
-    } catch (error) {
-      logout();
-    }
-  }
 
   const logout = async () => {
     if (localStorage.getItem("token")) {
@@ -94,30 +70,47 @@ const AuthContextProvider = ({ children }) => {
         formData.append("refresh", token.refresh);
         localStorage.removeItem("token");
         localStorage.removeItem("username");
-        localStorage.removeItem("user");
+        localStorage.removeItem("email");
 
-        let res = await axios.post(`${API}user_account/logout/`,
-          formData,
-          { headers: { Authorization } }
-        );
-        console.log(res)
+        let res = await axios.post(`${API}user_account/logout/`, formData, {
+          headers: { Authorization },
+        });
+        console.log(res);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     } else {
       return;
-  }
+    }
   };
+
+  const getProfile = async () => {
+    let token = JSON.parse(localStorage.getItem("token"));
+    const Authorization = `Bearer ${token.access}`;
+
+    await axios(`${API}user_account/profile/`, {
+      headers: { Authorization },
+    }).then((res) => {
+      setUser(res.data.username);
+    })
+  }
+
+  const getProfiles = async () => {
+    let res = await axios(`${API}user_account/profiles/`)
+    setUsers(res.data.results);
+  }
 
   return (
     <authContext.Provider
       value={{
         register,
         login,
-        checkAuth,
+        getProfiles,
         logout,
         error,
         user,
+        users,
+        setError,
       }}
     >
       {children}

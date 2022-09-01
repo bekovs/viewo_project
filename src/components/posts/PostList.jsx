@@ -13,12 +13,15 @@ const PostList = () => {
   return (
     <div className='post-list'>
       {
-        posts.length > 0 ?
+        posts.length ?
           posts.map((post, index) => (
             <PostCard post={post} key={index}/>
           ))
           :
-          <h3 style={{marginTop: '30px'}}>Loading...</h3>
+          <>
+            <h3 style={{marginTop: '30px'}}>Loading...</h3>
+            <h3 style={{marginTop: '30px'}}>or there is no videos</h3>
+          </>
       }
     </div>
   );

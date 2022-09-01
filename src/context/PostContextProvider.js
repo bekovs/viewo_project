@@ -36,13 +36,12 @@ const PostContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INIT_STATE)
 
   const getPosts = async () => {
-    const { data } = await axios(`${API}video/videos/`);
+    const { data } = await axios(`${API}video/videos/${window.location.search}`);
 
     dispatch({
       type: ACTIONS.GET_POSTS,
       payload: data.results,
     })
-    console.log(data.results)
   }
   
 

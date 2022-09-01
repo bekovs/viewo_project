@@ -1,6 +1,8 @@
 import React from 'react';
+import { getDate } from '../../helpers/funcs'
 
-const chatContactCard = () => {
+const chatContactCard = ({ chat }) => {
+
   return (
     <li className="left__chat_item">
       <div className="chat__profile-avatar">
@@ -8,10 +10,10 @@ const chatContactCard = () => {
       </div>
       <div className="chat__list-info">
         <div className="chat__companion_username">
-          <b>T</b>
+          <b>{chat.length ? chat[0].receiver : ""}</b>
         </div>
         <div className="chat__message_preview">
-          <div className='chat__message_preview-item1'>это из годов так 2000-х</div> <span className='chat__message_preview-item2'>8/29/2022</span>
+          <div className='chat__message_preview-item1'>{chat.length ? chat[0].message : ""}</div> <span className='chat__message_preview-item2'>{chat.length ? getDate(chat[0].date) : ""}</span>
         </div>
       </div>
     </li>

@@ -21,9 +21,11 @@
   flex-direction: column;
   width: 100%;
 }
+input {
+  padding: 1vmin;
+ }
 
 @media screen and (max-width: 1070px) {
   .main {
     padding: 0;
   }
-}
