@@ -13,7 +13,7 @@ const INIT_STATE = {
   categories: [],
 }
 
-const reducer = (state=INIT_STATE, action) => {
+const reducer = (state = INIT_STATE, action) => {
   switch (action.type) {
     case ACTIONS.GET_POSTS:
       return { ...state, posts: action.payload };
@@ -27,9 +27,9 @@ const reducer = (state=INIT_STATE, action) => {
 }
 
 const token = localStorage.getItem('token') ? JSON.parse(localStorage.getItem('token')) : "";
-  
+
 const config = {
-  headers: { 
+  headers: {
     "Content-Type": "multipart/form-data",
     "Authorization": `Bearer ${token.access}`
   },
@@ -75,6 +75,11 @@ const PostContextProvider = ({ children }) => {
     console.log(res);
   }
 
+  const addComment = async (comment) => {
+    let res = await axios.post(`${API}video/comment/`, comment, config);
+    console.log(res);
+  }
+
   const addToFavorites = async (id) => {
     let res = await axios(`${API}video/add_to_favorite/${id}/`, config);
     console.log(res);
@@ -85,6 +90,7 @@ const PostContextProvider = ({ children }) => {
     getCategories,
     getFavoritePosts,
     addPost,
+    addComment,
     addToFavorites,
     posts: state.posts,
     favoritePosts: state.favoritePosts,
