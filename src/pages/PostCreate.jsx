@@ -10,20 +10,28 @@ const PostCreate = () => {
   }
 
   return (
-    isAuth() ? 
-    <div className='main'>
-      <SideBar />
-      <div className="creation-container">
-        <AddPost />
+    isAuth() ?
+      <div className='main'>
+        <div className="position-sidebar__1">
+          <div className="position-sidebar__2">
+            <div className="position-sidebar__3">
+              <div className="position-sidebar__4">
+                <SideBar />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="creation-container">
+          <AddPost />
+        </div>
       </div>
-    </div>
-    :
-    <div className='main'>
-      <SideBar />
-      <div className="creation-container">
-        <h2>You need to Log In for creating content</h2>
+      :
+      <div className='main'>
+        <SideBar />
+        <div className="creation-container">
+          <h2>You need to Log In for creating content</h2>
+        </div>
       </div>
-    </div>
   );
 };
 
