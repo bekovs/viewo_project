@@ -181,16 +181,40 @@ const Navbar = () => {
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
             >
-              <Box
-                sx={style}
-                style={{
-                  width: "400px",
-                  height: "600px",
-                  border: "none",
-                  borderRadius: "5%",
-                  display: "flex",
-                  flexDirection: "column",
-                }}
+              <button className="header__upload-btn">+ Upload</button>
+              {localStorage.getItem("username") ? (
+                <div>
+                  <button
+                    style={{ marginLeft: "10%" }}
+                    aria-describedby={id}
+                    type="button"
+                    onClick={handleClick}
+                  >
+                    {localStorage.getItem("username")}
+                  </button>
+                  <Popper id={id} open={openPopper} anchorEl={anchorEl}>
+                    <Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>
+                      <Button
+                        onClick={() => {
+                          logout();
+                          navigate("/");
+                        }}
+                      >
+                        Sign out
+                      </Button>
+                    </Box>
+                  </Popper>
+                </div>
+              ) : (
+                <button onClick={handleOpen} className="header__btn-login">
+                  Log in
+                </button>
+              )}
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
               >
                 <Typography
                   sx={{ margin: "0 auto" }}
@@ -254,28 +278,80 @@ const Navbar = () => {
                     navigate("/");
                   }}
                 >
-                  Submit
-                </Button>
-              </Box>
-            </Modal>
-          </div>
-          <div>
-            <Modal
-              open={openLog}
-              onClose={handleCloseLog}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              <Box
-                sx={style}
-                style={{
-                  width: "400px",
-                  height: "600px",
-                  border: "none",
-                  borderRadius: "5%",
-                  display: "flex",
-                  flexDirection: "column",
-                }}
+                  <Typography
+                    sx={{ margin: "0 auto" }}
+                    id="modal-modal-title"
+                    variant="h6"
+                    component="h2"
+                  >
+                    Sign up
+                  </Typography>
+                  <Typography>email</Typography>
+                  <TextField
+                    value={email}
+                    onChange={(e) => SetEmail(e.target.value)}
+                    className="input"
+                    sx={{ paddingBottom: "5%" }}
+                    placeholder="email"
+                  ></TextField>
+                  <Typography>username</Typography>
+                  <TextField
+                    value={username}
+                    onChange={(e) => SetUsername(e.target.value)}
+                    className="input"
+                    sx={{ paddingBottom: "5%" }}
+                    placeholder="username"
+                  ></TextField>
+                  <Typography onChange={(e) => SetPassword(e.target.value)}>
+                    password
+                  </Typography>
+                  <TextField
+                    value={password}
+                    onChange={(e) => SetPassword(e.target.value)}
+                    className="input"
+                    sx={{ paddingBottom: "5%" }}
+                    placeholder="password"
+                  ></TextField>
+                  <Typography
+                    onChange={(e) => SetPasswordConfirm(e.target.value)}
+                  >
+                    confirm password
+                  </Typography>
+                  <TextField
+                    value={passwordConfirm}
+                    onChange={(e) => SetPasswordConfirm(e.target.value)}
+                    className="input"
+                    sx={{ paddingBottom: "5%" }}
+                    placeholder="confirm password"
+                  ></TextField>
+                  <Typography
+                    className="link"
+                    onClick={handleLog}
+                    style={{ fontSize: "1.6vmin" }}
+                  >
+                    already have an account?
+                  </Typography>
+
+                  <Button
+                    sx={{ marginTop: "20%" }}
+                    style={{ backgroundColor: "red", color: "white" }}
+                    onClick={() => {
+                      handleRegister();
+                      navigate("/");
+                      handleClose();
+                    }}
+                  >
+                    Submit
+                  </Button>
+                </Box>
+              </Modal>
+            </div>
+            <div>
+              <Modal
+                open={openLog}
+                onClose={handleCloseLog}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
               >
                 <Typography
                   sx={{ margin: "0 auto" }}
@@ -319,14 +395,57 @@ const Navbar = () => {
                     navigate("/");
                   }}
                 >
-                  Submit
-                </Button>
-              </Box>
-            </Modal>
+                  <Typography
+                    sx={{ margin: "0 auto" }}
+                    id="modal-modal-title"
+                    variant="h6"
+                    component="h2"
+                  >
+                    Sign in
+                  </Typography>
+                  <Typography>email</Typography>
+                  <TextField
+                    value={email}
+                    onChange={(e) => SetEmail(e.target.value)}
+                    className="input"
+                    sx={{ paddingBottom: "5%" }}
+                    placeholder="email"
+                  ></TextField>
+                  <Typography onChange={(e) => SetPassword(e.target.value)}>
+                    password
+                  </Typography>
+                  <TextField
+                    value={password}
+                    onChange={(e) => SetPassword(e.target.value)}
+                    className="input"
+                    sx={{ paddingBottom: "5%" }}
+                    placeholder="password"
+                  ></TextField>
+                  <Typography
+                    className="link"
+                    onClick={handleSign}
+                    style={{ fontSize: "1.6vmin" }}
+                  >
+                    dont have an account?
+                  </Typography>
+                  <Button
+                    sx={{ marginTop: "20%" }}
+                    style={{ backgroundColor: "red", color: "white" }}
+                    onClick={() => {
+                      handleLogin();
+                      navigate("/");
+                      handleCloseLog();
+                    }}
+                  >
+                    Submit
+                  </Button>
+                </Box>
+              </Modal>
+            </div>
           </div>
         </div>
-      </div>
-    </header>
+      </header>
+    </>
   );
 };
 

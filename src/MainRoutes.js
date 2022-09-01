@@ -33,6 +33,12 @@ const MainRoutes = () => {
       element: <PostCreate />,
       id: 5,
     },
+    {
+      link: "/postdetail/:id",
+      element: <PostDetailsPage />,
+      id: 6,
+    }
+
   ];
   return (
     <Routes>
