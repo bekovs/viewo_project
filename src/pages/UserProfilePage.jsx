@@ -3,11 +3,47 @@ import ProfileVideoCard from '../components/ProfileVideoCard';
 import SideBar from '../components/SideBar';
 import "../styles/userProfilePage.css"
 import rena from '../assets/images/rena.jpg'
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Button from '@mui/material/Button';
+import { Typography } from '@mui/material';
+import FollowCard from '../components/follow/FollowCard';
+
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 const UserProfilePage = () => {
+
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const [openFollowers, setOpenFollowers] = React.useState(false);
+  const handleOpenFollowers = () => setOpenFollowers(true);
+  const handleCloseFollowers = () => setOpenFollowers(false);
+
   return <div id='wrapper' style={{ display: "flex" }}>
-    <SideBar />
-    <main style={{ width: "80vw" }} className="profile__block">
+    <div className="position-sidebar__1">
+      <div className="position-sidebar__2">
+        <div className="position-sidebar__3">
+          <div className="position-sidebar__4">
+            <SideBar />
+          </div>
+        </div>
+      </div>
+    </div>
+    <main className="profile__block">
       <div className="profile__header">
         <div className="profile__header_top">
           <div className="profile__header-top_card">
@@ -41,6 +77,183 @@ const UserProfilePage = () => {
           </div>
           <div className="profile__descr-container">
             <div className="profile__stats">
+              <div>
+                <Button onClick={handleOpen}>
+                  <div className="profile__following">
+                    <span>20</span>
+                    Подписки
+                  </div>
+                </Button>
+                <Modal
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="modal-modal-title"
+                  aria-describedby="modal-modal-description"
+                >
+                  <Box sx={style}>
+                    <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ borderBottom: "2px solid black" }}>
+                      Подписки
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2, overflowY: "auto", overflowX: "hidden" }}>
+                      <div className="followers__block">
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                      </div>
+                    </Typography>
+                  </Box>
+                </Modal>
+              </div>
+              <div>
+                <Button onClick={handleOpenFollowers}>
+                  <div className="profile__followers">
+                    <span>
+                      13
+                    </span>
+                    Подписчики
+                  </div>
+                </Button>
+                <Modal
+                  open={openFollowers}
+                  onClose={handleCloseFollowers}
+                  aria-labelledby="modal-modal-title"
+                  aria-describedby="modal-modal-description"
+                >
+                  <Box sx={style}>
+                    <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ borderBottom: "2px solid black" }}>
+                      Подписчики
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2, overflowY: "auto", overflowX: "hidden" }}>
+                      <div className="followers__block">
+
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                        <FollowCard />
+                      </div>
+                    </Typography>
+                  </Box>
+                </Modal>
+              </div>
+              <div>
+                <Button onClick={handleOpenFollowers} disabled>
+                  <div className="profile__like-count">
+                    <span>
+                      98
+                    </span>
+                    Лайки
+                  </div>
+                </Button>
+              </div>
+              {/* <div>
+                <div className="profile__like-count">
+                  <span>
+                    98
+                  </span>
+                  Лайки
+                </div>
+              </div>
               <div className="profile__following">
                 <span>20</span>
                 Подписки
@@ -56,7 +269,7 @@ const UserProfilePage = () => {
                   98
                 </span>
                 Лайки
-              </div>
+              </div> */}
             </div>
             <div className="profile__descr">
 
@@ -81,6 +294,18 @@ const UserProfilePage = () => {
           </label>
         </div>
         <div className="profile__own-videos">
+          <ProfileVideoCard />
+          <ProfileVideoCard />
+          <ProfileVideoCard />
+          <ProfileVideoCard />
+          <ProfileVideoCard />
+          <ProfileVideoCard />
+          <ProfileVideoCard />
+          <ProfileVideoCard />
+          <ProfileVideoCard />
+          <ProfileVideoCard />
+          <ProfileVideoCard />
+          <ProfileVideoCard />
           <ProfileVideoCard />
           <ProfileVideoCard />
           <ProfileVideoCard />

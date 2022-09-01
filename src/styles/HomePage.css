@@ -12,6 +12,7 @@
 .sidebar {
   display: flex;
   flex-direction: column;
+  max-width: 300px;
   height: calc(100vh - 60px);
   padding-bottom: 30px;
   overflow-y: scroll;
@@ -132,7 +133,7 @@
 .post-actions button {
   background-color: #f1f1f2;
   border: 0;
-  margin: 15px 0;
+  margin: 0;
   border-radius: 50%;
   width: 50px;
   height: 50px;
@@ -144,8 +145,14 @@
   justify-content: center;
 }
 
-.post-actions div:hover {
+.post-actions button:hover {
   background-color: #f7f7f8;
+}
+.post-actions div {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  align-items: center;
 }
 
 .user-info div {
