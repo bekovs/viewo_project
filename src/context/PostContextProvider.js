@@ -9,12 +9,18 @@ export const usePost = () => useContext(postContext);
 const INIT_STATE = {
   posts: [],
   postDetails: {},
+  favoritePosts: [],
+  categories: [],
 }
 
 const reducer = (state=INIT_STATE, action) => {
   switch (action.type) {
     case ACTIONS.GET_POSTS:
       return { ...state, posts: action.payload };
+    case ACTIONS.GET_FAVORITES:
+      return { ...state, favoritePosts: action.payload };
+    case ACTIONS.GET_CATEGORIES:
+      return { ...state, categories: action.payload }
     default:
       return state;
   }
@@ -43,20 +49,46 @@ const PostContextProvider = ({ children }) => {
       payload: data.results,
     })
   }
+
+  const getCategories = async () => {
+    const { data } = await axios(`${API}video/categories/`);
+
+    dispatch({
+      type: ACTIONS.GET_CATEGORIES,
+      payload: data.results,
+    })
+  }
   
+  const getFavoritePosts = async () => {
+    const { data } = await axios(`${API}video/favorites/`, config);
+
+    dispatch({
+      type: ACTIONS.GET_FAVORITES,
+      payload: data.results,
+    })
+
+    console.log(data.results)
+  }
 
   const addPost = async (newPost) => {
-    newPost.append("user", 7);
     let res = await axios.post(`${API}video/videos/create/`, newPost, config);
     console.log(res);
   }
 
-
+  const addToFavorites = async (id) => {
+    let res = await axios(`${API}video/add_to_favorite/${id}/`, config);
+    console.log(res);
+  }
 
   const values = {
     getPosts,
+    getCategories,
+    getFavoritePosts,
     addPost,
+    addToFavorites,
     posts: state.posts,
+    favoritePosts: state.favoritePosts,
+    categories: state.categories,
   }
 
   return (

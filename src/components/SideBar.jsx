@@ -6,10 +6,22 @@ import HomeIcon from '@mui/icons-material/Home';
 import StarIcon from '@mui/icons-material/Star';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import PersonIcon from '@mui/icons-material/Person';
+import { useAuth } from '../context/AuthContextProvider';
+import { useEffect } from 'react';
+import { usePost } from '../context/PostContextProvider';
 
 const SideBar = () => {
 
+  const { getProfiles, users } = useAuth();
+  const { getCategories, categories } = usePost();
   const location = useLocation();
+
+  useEffect(()=>{
+    getProfiles();
+    getCategories();
+  }, [])
+
+  const userPath = (id) => "/profile/"  + id
 
   const activeHeader = (path) => {
     if (location.pathname == path) {
@@ -42,73 +54,28 @@ const SideBar = () => {
         </div>
         <div className='head-links rec-accounts'>
           <p>Recommended accounts</p>
-          <div className='rec-account'>
-            <img src={rena} alt="" />
-            <p className='user-name'>rena228</p>
-          </div>
-          <div className='rec-account'>
-            <img src={rena} alt="" />
-            <p className='user-name'>rena228</p>
-          </div>
-          <div className='rec-account'>
-            <img src={rena} alt="" />
-            <p className='user-name'>rena228</p>
-          </div>
-          <div className='rec-account'>
-            <img src={rena} alt="" />
-            <p className='user-name'>rena228</p>
-          </div>
-          <div className='rec-account'>
-            <img src={rena} alt="" />
-            <p className='user-name'>rena228</p>
-          </div>
-          <div className='rec-account'>
-            <img src={rena} alt="" />
-            <p className='user-name'>rena228</p>
-          </div>
-          <div className='rec-account'>
-            <img src={rena} alt="" />
-            <p className='user-name'>rena228</p>
-          </div>
-          <div className='rec-account'>
-            <img src={rena} alt="" />
-            <p className='user-name'>rena228</p>
-          </div>
-          <div className='rec-account'>
-            <img src={rena} alt="" />
-            <p className='user-name'>rena228</p>
-          </div>
-          <div className='rec-account'>
-            <img src={rena} alt="" />
-            <p className='user-name'>rena228</p>
-          </div>
-          <div className='rec-account'>
-            <img src={rena} alt="" />
-            <p className='user-name'>rena228</p>
-          </div>
-          <div className='rec-account'>
-            <img src={rena} alt="" />
-            <p className='user-name'>rena228</p>
-          </div>
+          {
+            users?.sort((a, b) => b.followers.length - a.followers.length).map((user) => (
+              <Link to={userPath(user.id)} key={user.id}>
+                {console.log(user.followers.length)}
+                <div className='rec-account'>
+                  <img src={user.image} alt="" />
+                  <p className='user-name'>{user.username}</p>
+                </div>
+              </Link>
+            ))
+          }
         </div>
         <div className='categories-block'>
           <p>Categories</p>
           <div className="categories">
-            <div className="category">
-              travel
-            </div>
-            <div className="category">
-              nsfw
-            </div>
-            <div className="category">
-              funny
-            </div>
-            <div className="category">
-              dogs
-            </div>
-            <div className="category">
-              some long ass category
-            </div>
+            {
+              categories?.map((category) => (
+                <div className="category" key={category.id}>
+                  {category.title}
+                </div>
+              ))
+            }
           </div>
         </div>
         <div className="footer">

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams, Link } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import rena from '../../assets/images/rena.jpg'
 import { useAuth } from '../../context/AuthContextProvider';
 import { usePost } from '../../context/PostContextProvider';
+import Likes from "../Likes"
 
 const PostCard = ({ post }) => {
   const [like, SetLike] = useState(false);
@@ -22,6 +24,7 @@ const PostCard = ({ post }) => {
     }
   }
 
+
   function favoriteFunc() {
     if (!favorite) {
       addToFavorites(post.id)
@@ -34,23 +37,18 @@ const PostCard = ({ post }) => {
     }
   }
 
-  const userPath = (id) => "/profile/"  + id
 
   return (
     <div className='post'>
       <div className='user-info'>
         <div className='user-info__head'>
-          <Link to={userPath(post.user_id)}>
-            <img src={post.user_image} alt="avatar" />
-          </Link>
+          <img src={post.user_image} alt="avatar" />
           <div>
-            <Link to={userPath(post.user_id)}>
-              <p className='user-name'>{post.user}</p>
-            </Link>
+            <p className='user-name'>{post.user}</p>
             <p className='post-title'>{post.description}</p>
           </div>
         </div>
-        <button onClick={() => followProfile(post.id)}>Follow</button>
+        <button onClick={() => followProfile(post.post_id)}>Follow</button>
       </div>
       <div className='post-info'>
         <video src={post.video} loop disablePictureInPicture controls>
@@ -91,7 +89,7 @@ const PostCard = ({ post }) => {
           <button className="comment" onClick={() => navigate("/postdetail/")}>
             <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24"><path d="M12,2C6.5,2,2,6.5,2,12c0,2.3,0.8,4.5,2.3,6.3l-2,2c-0.4,0.4-0.4,1,0,1.4C2.5,21.9,2.7,22,3,22h9c5.5,0,10-4.5,10-10S17.5,2,12,2z M8,13c-0.6,0-1-0.4-1-1s0.4-1,1-1s1,0.4,1,1S8.6,13,8,13z M12,13c-0.6,0-1-0.4-1-1s0.4-1,1-1s1,0.4,1,1S12.6,13,12,13z M16,13c-0.6,0-1-0.4-1-1s0.4-1,1-1s1,0.4,1,1S16.6,13,16,13z" /></svg>
           </button>
-          <span>{post.comments.length}</span>
+          {/* <span>{post.comments.length}</span> */}
         </div>
         <div>
           <button onClick={() => favoriteFunc()}>

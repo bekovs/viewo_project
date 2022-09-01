@@ -95,7 +95,7 @@ const AuthContextProvider = ({ children }) => {
     await axios(`${API}user_account/profile/`, {
       headers: { Authorization },
     }).then((res) => {
-      setUser(res.data.username);
+      setUser(res.data);
     })
   }
 
@@ -117,6 +117,7 @@ const AuthContextProvider = ({ children }) => {
       value={{
         register,
         login,
+        getProfile,
         getProfiles,
         logout,
         error,

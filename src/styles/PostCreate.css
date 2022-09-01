@@ -26,6 +26,10 @@ input {
   padding: 1vmin;
 }
 
+select {
+  padding: 1vmin;
+}
+
 .inputs-container {
   display: flex;
   flex-direction: column;
@@ -45,6 +49,17 @@ input {
 }
 
 .add-post__input input:focus {
+  border: 1px solid #565656;
+}
+
+.add-post__input select {
+  outline: 0;
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid #a8a8a8;
+}
+
+.add-post__input select:focus {
   border: 1px solid #565656;
 }
 

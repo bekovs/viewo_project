@@ -6,6 +6,7 @@ import HelpPage from "./pages/HelpPage";
 import PostCreate from "./pages/PostCreate";
 import UserProfilePage from "./pages/UserProfilePage";
 import PostDetailsPage from "./pages/PostDetailsPage";
+import FavoritesPage from "./pages/FavoritesPage";
 
 const MainRoutes = () => {
   const PUBLIC_ROUTES = [
@@ -38,6 +39,11 @@ const MainRoutes = () => {
       link: "/postdetail/:id",
       element: <PostDetailsPage />,
       id: 6,
+    },
+    {
+      link: "/favorites",
+      element: <FavoritesPage />,
+      id: 7,
     }
 
   ];

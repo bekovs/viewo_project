@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import PostCard from './PostCard';
+import FavoritePostCard from './FavoritePostCard';
 import { usePost } from '../../context/PostContextProvider';
 
 const PostList = () => {
 
-  const { getPosts, posts } = usePost();
+  const { getFavoritePosts, favoritePosts } = usePost();
 
   useEffect(() => {
-    getPosts();
+    getFavoritePosts();
   }, [])
+
+  console.log(favoritePosts)
 
   return (
     <div className='post-list'>
       {
-        posts.length ?
-          posts.map((post, index) => (
-            <PostCard post={post} key={index} />
+        favoritePosts?.length ?
+          favoritePosts.map((post, index) => (
+            <FavoritePostCard post={post} key={index} />
           ))
           :
           <>
