@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import HelpPage from "./pages/HelpPage";
 import PostCreate from "./pages/PostCreate";
 import UserProfilePage from "./pages/UserProfilePage";
+import PostDetailsPage from "./pages/PostDetailsPage";
 
 const MainRoutes = () => {
   const PUBLIC_ROUTES = [

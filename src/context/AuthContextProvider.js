@@ -14,8 +14,13 @@ const AuthContextProvider = ({ children }) => {
 
   const navigate = useNavigate();
 
+  const token = localStorage.getItem('token') ? JSON.parse(localStorage.getItem('token')) : "";
+
   const config = {
-    headers: { "Content-Type": "multipart/form-data" },
+    headers: {
+      "Content-Type": "multipart/form-data",
+      "Authorization": `Bearer ${token.access}`
+    },
   };
 
   const register = async (email, username, password, password_confirm) => {
@@ -59,7 +64,6 @@ const AuthContextProvider = ({ children }) => {
 
   const logout = async () => {
     if (localStorage.getItem("token")) {
-      let token = JSON.parse(localStorage.getItem("token"));
 
       try {
         const Authorization = `Bearer ${token.access}`;
@@ -85,7 +89,7 @@ const AuthContextProvider = ({ children }) => {
   };
 
   const getProfile = async () => {
-    let token = JSON.parse(localStorage.getItem("token"));
+
     const Authorization = `Bearer ${token.access}`;
 
     await axios(`${API}user_account/profile/`, {
@@ -100,6 +104,14 @@ const AuthContextProvider = ({ children }) => {
     setUsers(res.data.results);
   }
 
+  const followProfile = async (id) => {
+    let fakeuser = {
+      following_user_id: id,
+    }
+    let res = await axios.post(`${API}user_account/profile/follow/`, fakeuser, config)
+    console.log(res)
+  }
+
   return (
     <authContext.Provider
       value={{
@@ -111,6 +123,7 @@ const AuthContextProvider = ({ children }) => {
         user,
         users,
         setError,
+        followProfile,
       }}
     >
       {children}
