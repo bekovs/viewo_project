@@ -55,7 +55,7 @@ const UserProfilePage = () => {
 
   useEffect(() => {
     getChats();
-    getUser()
+    getUser();
   }, [users])
 
   const getUser = () => { // user profile id\

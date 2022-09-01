@@ -11,7 +11,7 @@ const INIT_STATE = {
   postDetails: {},
 }
 
-const reducer = (state=INIT_STATE, action) => {
+const reducer = (state = INIT_STATE, action) => {
   switch (action.type) {
     case ACTIONS.GET_POSTS:
       return { ...state, posts: action.payload };
@@ -21,9 +21,9 @@ const reducer = (state=INIT_STATE, action) => {
 }
 
 const token = localStorage.getItem('token') ? JSON.parse(localStorage.getItem('token')) : "";
-  
+
 const config = {
-  headers: { 
+  headers: {
     "Content-Type": "multipart/form-data",
     "Authorization": `Bearer ${token.access}`
   },
@@ -43,7 +43,7 @@ const PostContextProvider = ({ children }) => {
       payload: data.results,
     })
   }
-  
+
 
   const addPost = async (newPost) => {
     newPost.append("user", 7);
@@ -51,11 +51,16 @@ const PostContextProvider = ({ children }) => {
     console.log(res);
   }
 
+  const addComment = async (comment) => {
+    let res = await axios.post(`${API}video/comment/`, comment, config);
+    console.log(res);
+  }
 
 
   const values = {
     getPosts,
     addPost,
+    addComment,
     posts: state.posts,
   }
 
