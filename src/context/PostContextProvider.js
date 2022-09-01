@@ -51,6 +51,8 @@ const PostContextProvider = ({ children }) => {
     console.log(res);
   }
 
+
+
   const values = {
     getPosts,
     addPost,

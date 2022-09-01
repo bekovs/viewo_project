@@ -7,9 +7,9 @@ const FollowCard = ({ profile }) => {
       <div className="follower__block">
         <a>
           <div className="follower__avatar">
-            <img src="https://images.prismic.io/mystique/983eac5a-23be-4b1f-af1c-791d6931f760_IMG_1.jpg?auto=compress%2Cformat&w=540&q=75&fit=crop&ar=16%3A9&fm=webp&exp=-10" alt="" />
+            <img src={profile.following_user_image ? profile.following_user_image :"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSe9h_WR5WgI-kABsR2M2WOO_EIhXYrP6r7M-HKltk&s"} alt="" />
           </div>
-          <div className="follower__username">{profile.username}</div>
+          <div className="follower__username">{profile.following_username}</div>
         </a>
       </div>
     </>

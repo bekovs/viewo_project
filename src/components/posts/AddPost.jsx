@@ -45,13 +45,19 @@ const AddPost = () => {
     <div className='creation'>
       <h2>Upload new post</h2>
       <div className="inputs-container">
-        <label htmlFor="title">Title</label>
-        <input type="text" id="title" onChange={(e)=>handleInp(e)} />
-        <label htmlFor="description">Description</label>
-        <input type="text" id="description" onChange={(e)=>handleInp(e)} />
-        <label htmlFor="video">Video</label>
-        <input type="file" id="video" onChange={(e)=>handleInp(e)} />
-        <button onClick={()=>handleSave(post)}>Save</button>
+        <div className="add-post__input">
+          <label htmlFor="title">Title</label>
+          <input type="text" id="title" onChange={(e) => handleInp(e)} />
+        </div>
+        <div className="add-post__input">
+          <label htmlFor="description">Description</label>
+          <input type="text" id="description" onChange={(e) => handleInp(e)} />
+        </div>
+        <div className="add-post__input">
+          <label htmlFor="video" className='video-upload__btn'>Video upload</label>
+          <input type="file" accept="video/*" id="video" onChange={(e) => handleInp(e)} style={{display: "none"}} />
+        </div>
+        <button onClick={() => handleSave(post)} className="save__upload-btn">Save</button>
       </div>
     </div>
   );
