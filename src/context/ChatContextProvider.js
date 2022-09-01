@@ -65,13 +65,13 @@ const ChatContextProvider = ({ children }) => {
     })
   }
 
-  const sendMessage = async (messageText, receiver_id, chat_id) => {
+  const sendMessage = async (chat_id, receiver_id, messageText) => {
     let newMessage = {
       message: messageText,
-      receiver: 4, // replace with receiver_id
+      receiver: receiver_id,
     }
 
-    let res = await axios.post(`${API}chat/messages/create/${1}/`, newMessage, config); //replace with chat_id
+    let res = await axios.post(`${API}chat/messages/create/${chat_id}/`, newMessage, config); //replace with chat_id
     console.log(res)
   }
 

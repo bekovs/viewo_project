@@ -12,16 +12,17 @@ import { usePost } from '../context/PostContextProvider';
 
 const SideBar = () => {
 
-  const { getProfiles, users } = useAuth();
+  const { getProfiles, users, getProfile, user } = useAuth();
   const { getCategories, categories } = usePost();
   const location = useLocation();
 
   useEffect(()=>{
     getProfiles();
+    getProfile();
     getCategories();
   }, [])
 
-  const userPath = (id) => "/profile/"  + id
+  const userPath = (id) => "/profile/"  + (id ? id : "")
 
   const activeHeader = (path) => {
     if (location.pathname == path) {
@@ -48,7 +49,7 @@ const SideBar = () => {
           <Link to="/favorites">
             <div className={activeHeader('/favorites')}><StarIcon /><span>Favorites</span></div>
           </Link>
-          <Link to="/profile">
+          <Link to={userPath(user?.id)}>
             <div className={activeHeader('/profile')}><PersonIcon /><span>Profile</span></div>
           </Link>
         </div>

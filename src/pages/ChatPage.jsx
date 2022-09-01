@@ -2,17 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ChatContactCard from '../components/chats/ChatContactCard';
 import MessageBlock from "../components/chats/MessageBlock"
+import { useAuth } from '../context/AuthContextProvider';
 import { useChat } from '../context/ChatContextProvider';
 import "../styles/chatPage.css";
 
 const ChatPage = () => {
 
   const { getChats, sendMessage, chats, getChatDetails, chat_details } = useChat();
+  const { getProfiles, users } = useAuth();
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
   useEffect(()=>{
-    getChats()
+    getChats();
+    getProfiles();
   }, []);
 
   const [sendBtn, setSendBtn] = useState("#F1F1F2");
@@ -30,6 +33,12 @@ const ChatPage = () => {
     return localStorage.getItem("email") ? true : false
   }
 
+  const getReceiverId = (receiver) => users?.filter((user) => user.username == receiver)[0].id;
+
+  const handleSend = (chat_id, receiver_id, message_body) => {
+    sendMessage(chat_id, receiver_id, message_body)
+  }
+
   return (
     isAuth() ? 
     <div className='chatPage'>
@@ -45,16 +54,13 @@ const ChatPage = () => {
           </div>
           <ul className="left__chat_list">
             {
-              chats.length ? 
-                chats.map((chat, index) => (
-                  chat.length ? 
-                  <div key={index} onClick={()=>getChatDetails(chat[0].chat_id)}>
-                    <ChatContactCard chat={chat} key={index}/>
-                  </div>
-                  : null
-                ))
-              :
-              <h4>Loading...</h4>
+              chats?.map((chat, index) => (
+                chat.length ? 
+                <div key={index} onClick={()=>getChatDetails(chat[0].chat_id)}>
+                  <ChatContactCard chat={chat} key={index}/>
+                </div>
+                : null
+              ))
             }
           </ul>
         </div>
@@ -88,7 +94,7 @@ const ChatPage = () => {
                   FuncSendBtn(e.target.value)
                   setMessage(e.target.value)
                 }} />
-                <button onClick={()=>sendMessage(message)}>
+                <button onClick={()=>handleSend(chat_details[0].chat_id, getReceiverId(chat_details[0].receiver), message)}>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 32 32" width="2em" height="2em" data-e2e="message-send" className="tiktok-d7yhdo-StyledSendButton e1823izs2"><path fill={sendBtn} fillRule="evenodd" d="M30.488 4.667A1.333 1.333 0 0029.333 4H2.667a1.333 1.333 0 00-.987 2.23l6.96 7.65c.37.406.948.544 1.46.35l9.667-3.674c.112-.043.163-.025.186-.016a.303.303 0 01.138.13.303.303 0 01.047.184c-.003.023-.012.077-.104.154l-7.936 6.732c-.41.347-.57.905-.41 1.417l3.04 9.67a1.333 1.333 0 002.427.266L30.488 6c.238-.413.238-.92 0-1.333z" clipRule="evenodd"></path></svg>
                 </button>
               </div>
@@ -98,7 +104,7 @@ const ChatPage = () => {
       </div>
     </div>
     :
-    <h2>You need to Log In for chatting</h2>
+    <h2 style={{margin: '20%'}}>You need to Log In for chatting</h2>
   );
 };
 

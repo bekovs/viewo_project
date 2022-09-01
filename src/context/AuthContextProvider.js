@@ -55,7 +55,8 @@ const AuthContextProvider = ({ children }) => {
       localStorage.setItem("token", JSON.stringify(res.data));
       localStorage.setItem("email", email);
       getProfile();
-      localStorage.setItem("username", user)
+      console.log(user)
+      localStorage.setItem("username", user.username)
     } catch (error) {
       console.log(error);
       setError("Wrong username or password", error);

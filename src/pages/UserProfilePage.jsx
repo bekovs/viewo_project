@@ -58,6 +58,10 @@ const UserProfilePage = () => {
     getUser();
   }, [users])
 
+  useEffect(()=>{
+    getUser();
+  },[id])
+
   const getUser = () => { // user profile id\
     users.forEach((user) => {
       if (user.id == id) {
@@ -137,7 +141,6 @@ const UserProfilePage = () => {
                       </>
                     ) : (
                       <>
-                        {console.log(false)}
                         <div className="profile__btn-subscribed_list">
                           {
                             isAuth() ?
