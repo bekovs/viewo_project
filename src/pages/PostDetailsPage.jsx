@@ -1,19 +1,79 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SideBar from '../components/SideBar';
 import "../styles/postDetailPage.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CommentCard from '../components/follow/CommentCard';
+import { useAuth } from '../context/AuthContextProvider';
+import { usePost } from '../context/PostContextProvider';
 
 const PostDetailsPage = () => {
-  const [addComment, setAddComment] = useState("#9F9B95");
+
+  const [addCommentBtn, setAddCommentBtn] = useState("#9F9B95");
+
+  const [comment, setComment] = useState({
+    body: "",
+  })
+
+
   const navigate = useNavigate();
+
+
+  const [current_profile, setCurrent_profile] = useState({});
+
+  const { users } = useAuth();
+  const { posts, addComment } = usePost();
+
+  const { id } = useParams();
+
+
+
+  useEffect(() => {
+    getUser()
+  }, [users])
+
+  const getUser = () => { // user profile id\
+    users.forEach((user) => {
+      if (user.id == id) {
+        setCurrent_profile(user)
+      }
+    })
+  }
+
+  const handleInp = (e) => {
+    setComment({
+      ...comment,
+      [e.target.name]: e.target.value,
+    })
+    console.log(comment.body)
+  }
+  console.log(posts)
+
+  function dataReceive() {
+    let post = posts.filter(e => (e.id == id))
+    return post[0];
+  }
+
+  const post = dataReceive()
+  console.log(post)
+
+
+  const handleComment = () => {
+    console.log(comment.body)
+    console.log(post.id)
+    let newComment = new FormData();
+    newComment.append("body", comment.body);
+    newComment.append("post", post.id);
+    addComment(newComment)
+  }
+
+
 
   function FuncSendBtn(e) {
     // (e == "") ? 
     if (e) {
-      setAddComment("#FE2C55");
+      setAddCommentBtn("#FE2C55");
     } else {
-      setAddComment("#9F9B95")
+      setAddCommentBtn("#9F9B95")
     }
   }
 
@@ -33,37 +93,38 @@ const PostDetailsPage = () => {
           <div className="postDetail__header">
             <a onClick={() => navigate("/profile")}>
               <div className="postDetail__header_avatar">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgolBdeaXdt7hZ4G28YiA8shOCg4jkBg08uA&usqp=CAU" alt="" />
+                <img src={post.user_image} alt="" />
               </div>
               <div className="postDetail_username">
-                sultan
+                {post.user}
               </div>
             </a>
             <div className="postDetail__descr">
-              Cepat tag bestie kalian buat trend ini #tutorialdance #fypシ゚viral #fypシ゚viral #trend #dangdutan
+              {post.description}
             </div>
           </div>
           <div className="postDetail__top">
-            <video src="https://youtu.be/24887ZrTnzI" controls>Your browser does not support the video tag.</video>
-            <div className="postDetail__back-btn">
+            <video src={post.video} controls>Your browser does not support the video tag.</video>
+            <div className="postDetail__back-btn" onClick={() => navigate(-1)}>
               <svg width="25" height="25" viewBox="0 0 48 48" fill="#FFF" xmlns="http://www.w3.org/2000/svg" style={{ transform: "rotate(180deg)" }}><path fillRule="evenodd" clipRule="evenodd" d="M34.4142 22.5858L18.1213 6.29289C17.7308 5.90237 17.0976 5.90237 16.7071 6.29289L15.2929 7.70711C14.9024 8.09763 14.9024 8.7308 15.2929 9.12132L30.1716 24L15.2929 38.8787C14.9024 39.2692 14.9024 39.9024 15.2929 40.2929L16.7071 41.7071C17.0976 42.0976 17.7308 42.0976 18.1213 41.7071L34.4142 25.4142C35.1953 24.6332 35.1953 23.3668 34.4142 22.5858Z"></path></svg>
             </div>
           </div>
           <div className="postDetail__comments">
-            <CommentCard />
-            <CommentCard />
-            <CommentCard />
-            <CommentCard />
-            <CommentCard />
-            <CommentCard />
-            <CommentCard />
+            {
+              post.comments.map(e => (
+                <CommentCard comment={e} />
+              ))
+            }
           </div>
           <div className="postDetail__bottom">
             <div className="postDetail__info-block">
               <div className="comment-block__send-block">
                 <div className="comment-block__send_input__block">
-                  <input type="text" placeholder='Add comment...' onChange={(e) => FuncSendBtn(e.target.value)} />
-                  <button style={{ color: addComment }}>
+                  <input type="text" placeholder='Add comment...' name='body' onChange={(e) => (
+                    handleInp(e),
+                    FuncSendBtn(e.target.value)
+                  )} />
+                  <button style={{ color: addCommentBtn }} onClick={() => handleComment()}>
                     Post
                   </button>
                 </div>

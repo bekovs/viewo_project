@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import rena from '../../assets/images/rena.jpg'
 import { useAuth } from '../../context/AuthContextProvider';
+import PostDetailsPage from '../../pages/PostDetailsPage';
 import Likes from "../Likes"
 
 const PostCard = ({ post }) => {
@@ -35,6 +36,8 @@ const PostCard = ({ post }) => {
       SetFavorite(false)
     }
   }
+
+
 
 
   return (
@@ -85,7 +88,7 @@ const PostCard = ({ post }) => {
           <span>{post.post_likes}</span>
         </div>
         <div>
-          <button className="comment" onClick={() => navigate("/postdetail")}>
+          <button className="comment" onClick={() => navigate(`/postdetail/${post.id}`)}>
             <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24"><path d="M12,2C6.5,2,2,6.5,2,12c0,2.3,0.8,4.5,2.3,6.3l-2,2c-0.4,0.4-0.4,1,0,1.4C2.5,21.9,2.7,22,3,22h9c5.5,0,10-4.5,10-10S17.5,2,12,2z M8,13c-0.6,0-1-0.4-1-1s0.4-1,1-1s1,0.4,1,1S8.6,13,8,13z M12,13c-0.6,0-1-0.4-1-1s0.4-1,1-1s1,0.4,1,1S12.6,13,12,13z M16,13c-0.6,0-1-0.4-1-1s0.4-1,1-1s1,0.4,1,1S16.6,13,16,13z" /></svg>
           </button>
           <span>{post.comments.length}</span>

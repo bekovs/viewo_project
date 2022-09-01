@@ -6,6 +6,8 @@ const PostList = () => {
 
   const { getPosts, posts } = usePost();
 
+console.log(posts)
+
   useEffect(() => {
     getPosts();
   }, [])

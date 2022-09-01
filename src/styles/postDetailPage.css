@@ -150,6 +150,10 @@
   flex-direction: column;
 }
 
+.comment__time {
+  justify-self: end;
+  font-size: 12px;
+}
 
 
 
