@@ -10,8 +10,16 @@ const HelpPage = () => {
         flexDirection: "column",
       }}
     >
-      <Typography sx={{ fontSize: "4vmin" }}>Feedback and help</Typography>
-      <img src={qr} style={{ width: "40%" }} />
+      <img
+        src={qr}
+        style={{ width: "40%", alignSelf: "center", marginTop: "100px" }}
+      />
+
+      <Typography
+        sx={{ fontSize: "4vmin", color: "black", alignSelf: "center" }}
+      >
+        Feedback and help
+      </Typography>
     </div>
   );
 };
