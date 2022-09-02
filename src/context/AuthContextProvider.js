@@ -31,7 +31,6 @@ const AuthContextProvider = ({ children }) => {
     formData.append("username", username);
     formData.append("password", password);
     formData.append("password_confirm", password_confirm);
-    console.log(formData);
     try {
       const res = await axios.post(
         `${API}user_account/register/`,
