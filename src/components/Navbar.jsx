@@ -60,8 +60,8 @@ const Navbar = () => {
     changePassword,
   } = useAuth();
   const [email, SetEmail] = useState();
-  const [password, SetPassword] = useState();
-  const [newPassword, SetNewPassword] = useState();
+  const [password, SetPassword] = useState("");
+  const [newPassword, SetNewPassword] = useState("");
   const [username, SetUsername] = useState();
   const [passwordConfirm, SetPasswordConfirm] = useState();
   const navigate = useNavigate();
@@ -90,14 +90,21 @@ const Navbar = () => {
     setSearchParams({});
   }, []);
 
-  console.log(password, newPassword);
-
   function handleRegister() {
     register(email, username, password, passwordConfirm);
   }
 
   function handleChange(password, newPassword) {
+    console.log(password + ' ' + newPassword)
     changePassword(password, newPassword);
+  }
+
+  function handleInp(e) {
+    if (e.target.id == "password") {
+      SetPassword(e.target.value)
+    } else if (e.target.id == "newpassword") {
+      SetNewPassword(e.target.value)
+    }
   }
 
   function handleLogin() {
@@ -367,26 +374,28 @@ const Navbar = () => {
                 </Typography>
                 <Typography>enter your old password</Typography>
                 <TextField
-                  value={password}
-                  onChange={(e) => SetPassword(e.target.value)}
+                value={password}
+                  onChange={(e)=>handleInp(e)}
                   className="input"
                   sx={{ paddingBottom: "5%" }}
                   placeholder="password"
+                  id="password"
                 ></TextField>
 
                 <Typography>enter your new password</Typography>
                 <TextField
-                  value={newPassword}
-                  onChange={(e) => SetNewPassword(e.target.value)}
+                value={newPassword}
+                  onChange={(e)=>handleInp(e)}
                   className="input"
                   sx={{ paddingBottom: "5%" }}
                   placeholder="new password"
+                  id="newpassword"
                 ></TextField>
                 <Button
                   sx={{ marginTop: "20%" }}
                   style={{ backgroundColor: "red", color: "white" }}
                   onClick={() => {
-                    handleChange();
+                    handleChange(password, newPassword);
                     navigate("/");
                   }}
                 >

@@ -36,7 +36,6 @@ const AuthContextProvider = ({ children }) => {
       const res = await axios.post(
         `${API}user_account/register/`,
         formData,
-        config
       );
       console.log(res);
     } catch (error) {
@@ -51,7 +50,7 @@ const AuthContextProvider = ({ children }) => {
     formData.append("password", password);
 
     try {
-      let res = await axios.post(`${API}user_account/login/`, formData, config);
+      let res = await axios.post(`${API}user_account/login/`, formData);
       navigate("/");
       console.log(res.data);
       localStorage.setItem("token", JSON.stringify(res.data));
@@ -98,10 +97,6 @@ const AuthContextProvider = ({ children }) => {
 
   const changePassword = async (password, newPassword) => {
     try {
-      const Authorization = `Bearer ${token.access}`;
-
-      console.log(Authorization);
-
       let formData = new FormData();
       formData.append("old_password", password);
       formData.append("new_password", newPassword);
@@ -109,9 +104,7 @@ const AuthContextProvider = ({ children }) => {
       let res = await axios.put(
         `${API}user_account/change_password/`,
         formData,
-        {
-          headers: { Authorization },
-        }
+        config
       );
       console.log(res);
     } catch (error) {

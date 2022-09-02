@@ -6,7 +6,7 @@ import { usePost } from '../../context/PostContextProvider';
 const PostCard = ({ post }) => {
   const [like, SetLike] = useState(false);
   const [favorite, SetFavorite] = useState(false);
-  const { addToFavorites } = usePost();
+  const { addToFavorites, likePost } = usePost();
 
   const { followProfile } = useAuth();
 
@@ -15,9 +15,11 @@ const PostCard = ({ post }) => {
   function likeFunc() {
     if (!like) {
       console.log(like)
+      likePost(post.id)
       SetLike(true)
     } else {
       console.log(like)
+      likePost(post.id)
       SetLike(false)
     }
   }

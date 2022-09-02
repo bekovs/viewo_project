@@ -70,6 +70,11 @@ const PostContextProvider = ({ children }) => {
     console.log(data.results)
   }
 
+  const likePost = (id) => {
+    let res = axios(`${API}video/like_post/${id}/`, config);
+    console.log(res)
+  }
+
   const addPost = async (newPost) => {
     let res = await axios.post(`${API}video/videos/create/`, newPost, config);
     console.log(res);
@@ -91,6 +96,7 @@ const PostContextProvider = ({ children }) => {
     getFavoritePosts,
     addPost,
     addComment,
+    likePost,
     addToFavorites,
     posts: state.posts,
     favoritePosts: state.favoritePosts,
